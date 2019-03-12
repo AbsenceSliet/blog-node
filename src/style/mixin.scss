@@ -1,0 +1,35 @@
+$main_color: #27292E;
+$font_color: #fff;
+// 背景图片地址和大小
+@mixin bis ($url) {
+    background-image: url(@url);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+@mixin allcover {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+// 居中定位
+@mixin ctp($w, $h) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: (-$h/2);
+    margin-left: (-$w/2);
+}
+
+@mixin ctt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

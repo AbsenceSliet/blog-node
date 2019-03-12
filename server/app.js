@@ -1,6 +1,10 @@
+'use strict'
+
 import express from 'express'
 import routes from './routes/index.js'
 import bodyParser from 'body-parser'
+import expressSession from 'express-session';
+
 const app = express()
 
 app.all('*', (req, res, next) => {
@@ -20,7 +24,7 @@ app.use(bodyParser.json({
     limit: '1mb'
 }))
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }))
 
 routes(app);

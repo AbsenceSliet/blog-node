@@ -37,3 +37,9 @@ yarn run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+##### pm2启动项目
+```
+pm2 start ecosystem.config.js --interpreter babel-node
+```

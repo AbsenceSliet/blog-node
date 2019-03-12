@@ -7,7 +7,7 @@ module.exports = {
 
         {
             name: 'blog-node',
-            script: 'start.js',
+            script: 'app.js',
             env: {
                 COMMON_VARIABLE: 'true'
             },

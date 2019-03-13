@@ -22,6 +22,8 @@ class Admin extends BaseComponent {
         this.md5Decode = this.md5Decode.bind(this)
     }
     async login(req, res, next) {
+        console.log(res, 'ahdkhasjh');
+
         const { username, password, status = 1 } = req.body
         if (!username) {
             throw new Error('用户名参数错误')

@@ -47,7 +47,14 @@ export default {
             this.$refs[formName].validate(async (valid) =>{
                 if(valid){
                     const res = await login({username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)})
-                    console.log(res)
+                    if(res.data.code == '1'){
+                        this.$message({message:'登录成功', type: 'success'});
+                        localStorage.setItem('token', res.data.result.token)
+                        this.$router.push({path:'/home'})
+                        setTimeout(() => {
+                            
+                        }, 1000);
+                    }
                 }
             })  
         }

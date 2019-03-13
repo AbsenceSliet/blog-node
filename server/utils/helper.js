@@ -9,9 +9,10 @@ export const handleError = ({
     res,
     err = null,
     message = '请求失败',
+    code = 0
 }) => {
     res.send({
-        code: 0,
+        code: code,
         message,
         err
     })

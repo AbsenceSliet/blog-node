@@ -3,8 +3,8 @@
 import express from 'express'
 import routes from './routes/index.js'
 import bodyParser from 'body-parser'
-import expressSession from 'express-session';
-
+import authIsVerified from './utils/auth'
+import { handleSuccess, handleError } from './utils/helper'
 const app = express()
 
 app.all('*', (req, res, next) => {
@@ -13,11 +13,23 @@ app.all('*', (req, res, next) => {
     res.header('Access-Control-Max-Age', '1728000')
     res.header('Content-Type', 'application/json;charset=utf-8')
     res.header("X-Powered-By", 'Express');
-    console.log('------------')
     if (req.method == 'OPTIONS') {
         res.sendStatus(200);
     } else {
         next();
+    }
+})
+app.use((req, res, next) => {
+    let TokenIsOk = authIsVerified(req)
+    let { url } = req
+    if (url.indexOf('/auth') > -1) {
+        if (TokenIsOk) {
+            next()
+        } else {
+            handleError({ res, message: 'Token失效', code: 403 })
+        }
+    } else {
+        next()
     }
 })
 app.use(bodyParser.json({

@@ -1,17 +1,17 @@
 import {
     baseUrl
 } from './env'
-import axios from 'axios'
-import {
-    checkToken,
-    isLogin
-}
-from '@/constants'
-import {
-    TOKEN_HEADER,
-    TOKEN
-}
-from '@/constants/auth'
+// import axios from 'axios'
+// import {
+//     checkToken,
+//     isLogin
+// }
+// from '@/constants'
+// import {
+//     TOKEN_HEADER,
+//     TOKEN
+// }
+// from '@/constants/auth'
 
 // export class HttpquesterService {
 //     constructor() {

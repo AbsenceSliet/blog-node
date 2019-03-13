@@ -1,3 +1,7 @@
-import fetch from '../config/fetch'
+import service from '../config/fetch'
 
-export const login = data => fetch('/admin/login', data, 'POST')
+export const login = data => service({
+    url: '/admin/login',
+    data,
+    method: 'post'
+})

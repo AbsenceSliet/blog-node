@@ -57,6 +57,7 @@ class Admin extends BaseComponent {
                 data: AUTH.data,
                 exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7)
             }, AUTH.jwtToken)
+            console.log(token, 'token')
             handleSuccess({
                 res,
                 result: {

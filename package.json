@@ -10,6 +10,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "element-ui": "^2.6.1",
     "js-base64": "^2.5.1",
     "path": "^0.12.7",

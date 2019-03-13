@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import {login} from '@/api/api'
+import {login} from '@/constants/api'
 import { Base64 } from 'js-base64';
 export default {
     data(){

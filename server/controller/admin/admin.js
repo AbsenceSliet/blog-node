@@ -46,7 +46,6 @@ class Admin extends BaseComponent {
                 admin_id: admin_id
             }
             await AdminModel.create(adminContent)
-                // req.session.admin_id = admin_id;
             handleSuccess({ res, message: '注册管理员成功' })
         } else if (newpassword != admin.password) {
             handleError({
@@ -54,7 +53,6 @@ class Admin extends BaseComponent {
                 message: '用户名已经存在，密码错误'
             })
         } else {
-            // req.session.admin_id = admin_id;
             const token = jwt.sign({
                 data: AUTH.data,
                 exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7)

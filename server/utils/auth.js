@@ -25,4 +25,4 @@ const authIsVerified = req => {
     }
     return false
 }
-module.exports = authIsVerified
+export default authIsVerified

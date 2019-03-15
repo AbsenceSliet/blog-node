@@ -15,7 +15,11 @@ service.interceptors.request.use(
     config => {
         let { headers } = config;
         let token = localStorage.getItem(TOKEN)
-        Object.assign(headers, { Authorization: `Bearer ${token}` })
+        if (token) {
+            Object.assign(headers, {
+                Authorization: `Bearer ${token}`
+            })
+        }
         return config
     }, error => {
         return Promise.reject(error);
@@ -23,7 +27,7 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
     response => {
-        if (response.data.code == 403) {
+        if (response.data.code == 401) {
             router.push({ path: '/login' })
             return Promise.reject(response)
         }

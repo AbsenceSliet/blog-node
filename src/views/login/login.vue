@@ -46,14 +46,15 @@ export default {
         async login(formName){
             this.$refs[formName].validate(async (valid) =>{
                 if(valid){
-                    const res = await login({username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)})
-                    if(res.data.code == '1'){
-                        this.$message({message:'登录成功', type: 'success'});
-                        localStorage.setItem('token', res.data.result.token)
-                        this.$router.push({path:'/home'})
-                        setTimeout(() => {
-                            
-                        }, 1000);
+                    try{
+                        const res = await login({username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)})
+                        if(res.data.code == '1'){
+                            this.$message({message:'登录成功', type: 'success'});
+                            localStorage.setItem('token', res.data.result.token)
+                            this.$router.push({path:'/dashboard'})
+                        }
+                    } catch(err){
+                        console.log(err.response.status)
                     }
                 }
             })  
@@ -62,7 +63,7 @@ export default {
 }
 </script>
 <style lang="scss">
- @import '../style/mixin';
+ @import '~@/style/mixin';
     .login_view{
         background-color: $main_color;
         color:$font_color;

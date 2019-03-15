@@ -26,7 +26,7 @@ app.use((req, res, next) => {
         if (TokenIsOk) {
             next()
         } else {
-            handleError({ res, message: 'Token失效', code: 403 })
+            handleError({ res, message: 'Token失效', code: 401 })
         }
     } else {
         next()

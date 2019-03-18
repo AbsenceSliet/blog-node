@@ -12,9 +12,9 @@
                     <el-form-item>
                         <el-button type="primary" @click="login('loginForm')" class="login_btn">登陆</el-button>
                     </el-form-item>
-                    <!-- <el-form-item>
+                    <el-form-item>
                         <el-button type="primary" @click="getuserinfo" class="login_btn">登陆ww</el-button>
-                    </el-form-item> -->
+                    </el-form-item>
                 </el-form>
             </section>
         </transition>
@@ -47,7 +47,8 @@ export default {
     },
     methods:{
         async getuserinfo(){
-            await getuserinfo()
+            const token  = localStorage.getItem('token')
+            await getuserinfo({slogan:token})
         },
         async login(formName){
             this.$refs[formName].validate(async (valid) =>{

@@ -1,18 +1,12 @@
 import AdminModel from '../../modles/admin/admin'
 import BaseComponent from '../../mixins/baseComponent'
-import {
-    Base64
-} from 'js-base64'
+import { Base64 } from 'js-base64'
 import { AUTH } from '../../app.config'
 import Crypto from 'crypto'
 import jwt from 'jsonwebtoken'
 import time from 'time-formater'
 import moment from 'moment'
-import {
-    handleSuccess,
-    handleError
-}
-from '../../utils/helper'
+import { handleSuccess, handleError } from '../../utils/helper'
 
 class Admin extends BaseComponent {
     constructor() {
@@ -54,12 +48,11 @@ class Admin extends BaseComponent {
                 message: '用户名已经存在，密码错误'
             })
         } else {
-            console.log(admin);
             const token = jwt.sign({
                 data: AUTH.data,
                 exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7)
             }, AUTH.jwtToken)
-            console.log(token, 'token');
+            await AdminModel.updateOne({ _id: admin._id }, { $set: { slogan: token } })
             handleSuccess({
                 res,
                 result: {
@@ -81,7 +74,9 @@ class Admin extends BaseComponent {
         return Crypto.createHash('md5').update(password).digest('jac')
     }
     async getAdminInfo(req, res, next) {
-        let info = await AdminModel.find({}, '-_id username status');
+        const slogan = req.headers.authorization.split(' ')[1]
+        console.log(slogan, 'slogan')
+        let info = await AdminModel.findOne(({ slogan: slogan }));
         console.log(info)
     }
 }

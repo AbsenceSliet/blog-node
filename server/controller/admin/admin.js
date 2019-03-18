@@ -53,11 +53,14 @@ class Admin extends BaseComponent {
                 exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7)
             }, AUTH.jwtToken)
             await AdminModel.updateOne({ _id: admin._id }, { $set: { slogan: token } })
+            let roles = [];
+            roles = admin.status == 1 ? ['editor'] : ['editor', 'admin']
             handleSuccess({
                 res,
                 result: {
                     token,
-                    userstatus: admin.status
+                    userstatus: admin.status,
+                    roles
                 },
                 message: '登陆成功'
             })

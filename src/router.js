@@ -20,40 +20,42 @@ const dashboard = r => require.ensure([], () => {
 })
 
 Vue.use(Router)
+export const defaultRouterMap = [{
+    path: '/',
+    component: login
+}, {
+    path: '/dashboard',
+    component: layout,
+    redirect: '/dashboard/index',
+    children: [{
+        path: 'index',
+        component: dashboard
+    }]
+}, {
+    path: '/401',
+    component: unfind
+}]
 
+export const asyncRouterMap = [{
+    path: '/permisson',
+    component: layout,
+    redrect: '/permisson/index',
+    meta: {
+        roles: ['admin', 'editor']
+    },
+    children: [{
+        path: 'page',
+        component: pageindex,
+        meta: {
+            roles: ['admin']
+        }
+    }, {
+        path: 'directve',
+        component: directive
+    }]
+}]
 export default new Router({
     mode: 'hash',
     base: process.env.BASE_URL,
-    routes: [{
-        path: '/',
-        component: login
-    }, {
-        path: '/permisson',
-        component: layout,
-        redrect: '/permisson/index',
-        meta: {
-            roles: ['admin', 'editor']
-        },
-        children: [{
-            path: 'page',
-            component: pageindex,
-            meta: {
-                roles: ['admin']
-            }
-        }, {
-            path: 'directve',
-            component: directive
-        }]
-    }, {
-        path: '/dashboard',
-        component: layout,
-        redirect: '/dashboard/index',
-        children: [{
-            path: 'index',
-            component: dashboard
-        }]
-    }, {
-        path: '/401',
-        component: unfind
-    }]
+    routes: defaultRouterMap
 })

@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         status: { type: Number, default: 1 },
-        token: { type: String, default: '' }
+        token: { type: String, default: '' },
+        roles: { type: Array, default: [] }
     },
     mutations: {
         SET_STATUS(state, status) {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
         },
         SET_TOKEN(state, token) {
             state.token = token
+        },
+        SET_ROLES(state, status) {
+            state.roles = status == 1 ? ['editor'] : ['editor', 'admin']
         }
     },
     actions: {
@@ -37,6 +41,7 @@ export default new Vuex.Store({
                 getuserinfo(state.token).then(response => {
                     const data = response.result
                     commit('SET_STATUS', data.userstatus)
+                    commit('SET_ROLES', data.userstatus)
                     resolve(response)
                 }).catch(error => {
                     reject(error)

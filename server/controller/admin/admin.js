@@ -78,6 +78,15 @@ class Admin extends BaseComponent {
         console.log(slogan, 'slogan')
         let info = await AdminModel.findOne(({ slogan: slogan }));
         console.log(info)
+        handleSuccess({
+            res,
+            result: {
+                username: info.username,
+                userstatus: info.status
+            },
+            message: '查询成功',
+            code: 1
+        })
     }
 }
 export default new Admin()

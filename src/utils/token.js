@@ -4,10 +4,7 @@ import {
     TOKEN
 }
 from '@/constants/auth'
-const checkToken = () => {
-    const token = localStorage.getItem(TOKEN)
-    return token && token.split('.').length === 3
-}
+
 const isLogin = url => {
     return url && url == '/admin'
 }
@@ -19,6 +16,10 @@ const getToken = () => {
 }
 const removeToken = () => {
     return localStorage.removeItem(TOKEN)
+}
+const checkToken = () => {
+    const token = getToken()
+    return token && token.split('.').length === 3
 }
 export default {
     checkToken,

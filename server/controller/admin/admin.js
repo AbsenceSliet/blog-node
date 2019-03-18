@@ -54,15 +54,17 @@ class Admin extends BaseComponent {
                 message: '用户名已经存在，密码错误'
             })
         } else {
+            console.log(admin);
             const token = jwt.sign({
                 data: AUTH.data,
                 exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7)
             }, AUTH.jwtToken)
-            console.log(token, 'token')
+            console.log(token, 'token');
             handleSuccess({
                 res,
                 result: {
-                    token
+                    token,
+                    userstatus: admin.status
                 },
                 message: '登陆成功'
             })
@@ -77,6 +79,10 @@ class Admin extends BaseComponent {
     // md5编码
     md5Decode(password) {
         return Crypto.createHash('md5').update(password).digest('jac')
+    }
+    async getAdminInfo(req, res, next) {
+        let info = await AdminModel.find({}, '-_id username status');
+        console.log(info)
     }
 }
 export default new Admin()

@@ -12,13 +12,16 @@
                     <el-form-item>
                         <el-button type="primary" @click="login('loginForm')" class="login_btn">登陆</el-button>
                     </el-form-item>
+                    <!-- <el-form-item>
+                        <el-button type="primary" @click="getuserinfo" class="login_btn">登陆ww</el-button>
+                    </el-form-item> -->
                 </el-form>
             </section>
         </transition>
     </div>
 </template>
 <script>
-import {login} from '@/constants/api'
+import {login, getuserinfo} from '@/constants/api'
 import { Base64 } from 'js-base64';
 export default {
     data(){
@@ -43,6 +46,9 @@ export default {
         this.showLogin = true
     },
     methods:{
+        async getuserinfo(){
+            await getuserinfo()
+        },
         async login(formName){
             this.$refs[formName].validate(async (valid) =>{
                 if(valid){
@@ -51,7 +57,7 @@ export default {
                         if(res.data.code == '1'){
                             this.$message({message:'登录成功', type: 'success'});
                             localStorage.setItem('token', res.data.result.token)
-                            this.$router.push({path:'/dashboard'})
+                            // this.$router.push({path:'/dashboard'})
                         }
                     } catch(err){
                         console.log(err.response.status)

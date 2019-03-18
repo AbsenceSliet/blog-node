@@ -5,3 +5,7 @@ export const login = data => service({
     data,
     method: 'post'
 })
+export const getuserinfo = () => service({
+    url: '/admin/getuserinfo',
+    method: 'get'
+})

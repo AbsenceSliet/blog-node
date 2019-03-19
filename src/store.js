@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { login, getuserinfo } from '@/constants/api'
-import { setToken, checkToken, removeToken } from '@/constants/api'
-import { Base64 } from 'js-base64';
+import { setToken, removeToken } from '@/utils/token'
 import { asyncRouterMap, defaultRouterMap } from './router'
 
 Vue.use(Vuex)
@@ -32,11 +31,15 @@ const filtersAsyncRouter = (routes, roles) => {
 
 export default new Vuex.Store({
     state: {
-        status: { type: Number, default: 1 },
-        token: { type: String, default: '' },
-        roles: { type: Array, default: [] },
-        routers: { type: Array, default: [] },
-        addRouters: { type: Array, default: [] },
+        status: 1,
+        token: '',
+        roles: [],
+        routers: [],
+        addRouters: [],
+    },
+    getters: {
+        addRouters: state => state.addRouters,
+        roles: state => state.roles
     },
     mutations: {
         SET_STATUS(state, status) {
@@ -57,8 +60,8 @@ export default new Vuex.Store({
         Login({ commit }, userInfo) {
             return new Promise((resolve, reject) => {
                 login(userInfo).then(response => {
-                    if (response.code == 1) {
-                        const data = response.result
+                    if (response.data.code == 1) {
+                        const data = response.data.result
                         commit('SET_TOKEN', data.token)
                         setToken(data.token)
                     }
@@ -71,9 +74,11 @@ export default new Vuex.Store({
         GetUserInfo({ commit, state }) {
             return new Promise((resolve, reject) => {
                 getuserinfo(state.token).then(response => {
-                    const data = response.result
-                    commit('SET_STATUS', data.userstatus)
-                    commit('SET_ROLES', data.roles)
+                    if (response.data.code == 1) {
+                        const data = response.data.result
+                        commit('SET_STATUS', data.userstatus)
+                        commit('SET_ROLES', data.roles)
+                    }
                     resolve(response)
                 }).catch(error => {
                     reject(error)
@@ -90,6 +95,7 @@ export default new Vuex.Store({
                     accessRouters = filtersAsyncRouter(asyncRouterMap, roles)
                 }
                 commit('SET_ROUTERS', accessRouters)
+                console.log(accessRouters)
                 resolve()
             })
         },
@@ -100,9 +106,9 @@ export default new Vuex.Store({
                 resolve()
             })
         },
-        LogOut({ commit, state }) {
-            return new Promise((resolve, reject) => {
-
+        LogOut({ commit }) {
+            return new Promise((resolve) => {
+                commit('SET_TOKEN', '')
             })
         }
     }

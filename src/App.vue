@@ -7,3 +7,10 @@
 <style lang="scss">
 @import './style/common';
 </style>
+<script>
+export default {
+    data(){
+        return{}
+    }
+}
+</script>

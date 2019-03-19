@@ -1,21 +1,27 @@
 import router from './router'
-import { hasPermission, store } from './store'
+import store from './store'
 import { Message } from 'element-ui'
-import { checkToken } from '@utils/token'
-
+import { checkToken } from '@/utils/token.js'
+// permission judge function
+function hasPermission(roles, permissionRoles) {
+    if (roles.indexOf('admin') >= 0) return true // admin permission passed directly
+    if (!permissionRoles) return true
+    return roles.some(role => permissionRoles.indexOf(role) >= 0)
+}
 const whiteList = ['/login']
+
 router.beforeEach((to, from, next) => {
-    if (checkToken) {
+    if (checkToken()) {
         if (to.path == '/login') {
             next({ path: '/' })
         } else {
-            if (store.getters.roles.length == 0) {
+            if (store.state.roles.length == 0) {
                 store.dispatch('GetUserInfo').then(res => {
-                    let roles = res.result.roles
+                    let roles = res.data.result.roles
 
                     // 动态生成路由表
                     store.dispatch('GenerateRoutes', { roles }).then(() => {
-                        router.addRoutes(store.getters.addRoutes)
+                        router.addRoutes(store.state.addRouters)
                         next({...to, replace: true })
                     }).catch(error => {
                         store.dispatch('FedLogOut').then(() => {
@@ -25,7 +31,7 @@ router.beforeEach((to, from, next) => {
                     })
                 })
             } else {
-                if (hasPermission(store.getters.roles, to.meta.roles)) {
+                if (hasPermission(store.state.roles, to.meta.roles)) {
                     next()
                 } else {
                     next({ path: '/401', replace: true, })
@@ -34,8 +40,12 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {
+            console.log(1);
+
             next()
         } else {
+            console.log(2);
+
             next(`/login?redirect=${to.path}`)
         }
     }

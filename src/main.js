@@ -6,6 +6,9 @@ import store from './store'
 import './registerServiceWorker'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
+import './permission' // permission control
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 

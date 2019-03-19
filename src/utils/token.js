@@ -1,30 +1,20 @@
 'use strict'
 
-import {
-    TOKEN
-}
-from '@/constants/auth'
+import { TOKEN } from '@/constants/auth'
 
-const isLogin = url => {
+export const isLogin = url => {
     return url && url == '/admin'
 }
-const setToken = (token) => {
+export const setToken = (token) => {
     return localStorage.setItem(TOKEN, token)
 }
-const getToken = () => {
+export const getToken = () => {
     return localStorage.getItem(TOKEN)
 }
-const removeToken = () => {
+export const removeToken = () => {
     return localStorage.removeItem(TOKEN)
 }
-const checkToken = () => {
+export const checkToken = () => {
     const token = getToken()
     return token && token.split('.').length === 3
-}
-export default {
-    checkToken,
-    isLogin,
-    setToken,
-    getToken,
-    removeToken
 }

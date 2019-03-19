@@ -1,6 +1,6 @@
-export const handleSuccess = ({ res, result = null, message = '请求成功' }) => {
+export const handleSuccess = ({ res, code, result = null, message = '请求成功' }) => {
     res.send({
-        code: 1,
+        code: code,
         message,
         result
     })

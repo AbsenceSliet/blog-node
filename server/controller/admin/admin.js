@@ -41,7 +41,7 @@ class Admin extends BaseComponent {
                 admin_id: admin_id
             }
             await AdminModel.create(adminContent)
-            handleSuccess({ res, message: '注册管理员成功' })
+            handleSuccess({ res, code: 2, message: '注册管理员成功' })
         } else if (newpassword != admin.password) {
             handleError({
                 res,
@@ -53,14 +53,12 @@ class Admin extends BaseComponent {
                 exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7)
             }, AUTH.jwtToken)
             await AdminModel.updateOne({ _id: admin._id }, { $set: { slogan: token } })
-            let roles = [];
-            roles = admin.status == 1 ? ['editor'] : ['editor', 'admin']
             handleSuccess({
                 res,
+                code: 1,
                 result: {
                     token,
                     userstatus: admin.status,
-                    roles
                 },
                 message: '登陆成功'
             })
@@ -81,11 +79,14 @@ class Admin extends BaseComponent {
         console.log(slogan, 'slogan')
         let info = await AdminModel.findOne(({ slogan: slogan }));
         console.log(info)
+        let roles = [];
+        roles = info.status == 1 ? ['editor'] : ['editor', 'admin']
         handleSuccess({
             res,
             result: {
                 username: info.username,
-                userstatus: info.status
+                userstatus: info.status,
+                roles
             },
             message: '查询成功',
             code: 1

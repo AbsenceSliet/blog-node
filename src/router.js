@@ -22,7 +22,7 @@ const dashboard = r => require.ensure([], () => {
 Vue.use(Router)
 export const defaultRouterMap = [{
     path: '/',
-    component: login
+    redirect: '/dashboard',
 }, {
     path: '/dashboard',
     component: layout,
@@ -31,6 +31,9 @@ export const defaultRouterMap = [{
         path: 'index',
         component: dashboard
     }]
+}, {
+    path: '/login',
+    component: login
 }, {
     path: '/401',
     component: unfind

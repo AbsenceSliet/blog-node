@@ -12,21 +12,18 @@
                     <el-form-item>
                         <el-button type="primary" @click="login('loginForm')" class="login_btn">登陆</el-button>
                     </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="getuserinfo" class="login_btn">登陆ww</el-button>
-                    </el-form-item>
                 </el-form>
             </section>
         </transition>
     </div>
 </template>
 <script>
-import {login, getuserinfo} from '@/constants/api'
 import { Base64 } from 'js-base64';
 export default {
     data(){
         return{
             showLogin: false,
+            redirect:undefined,
             loginForm:{
                 username: '',
                 passward: '',
@@ -45,18 +42,27 @@ export default {
     mounted(){
         this.showLogin = true
     },
+    watch: {
+        $route: {
+            handler: function(route) {
+                this.redirect = route.query && route.query.redirect
+            },
+            immediate: true
+        }
+    },
     methods:{
-        async getuserinfo(){
-            const token  = localStorage.getItem('token')
-            await getuserinfo({slogan:token})
-        },
         async login(formName){
             this.$refs[formName].validate(async (valid) =>{
                 if(valid){
                     let userinfo = {username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)}
                     this.$store.dispatch('Login',userinfo).then(res => {
+                        console.log(this.redirect,'redirect')
                         if(res.data.code == 1) {
                             this.$message({message:'登录成功', type: 'success'});
+                            this.$router.push({ path: this.redirect || '/' })
+                        }else if(res.data.code == 2){
+                            this.$message({message:'注册会员成功', type: 'success'});
+                            this.$router.push({ path: this.redirect || '/' })
                         }else{
                             this.$message({message:`${res.data.message}`, type: 'error'});
                         }

@@ -56,11 +56,13 @@ export default new Vuex.Store({
     actions: {
         Login({ commit }, userInfo) {
             return new Promise((resolve, reject) => {
-                login({ userInfo }).then(response => {
-                    const data = response.result
-                    commit('SET_TOKEN', data.token)
-                    setToken(data.token)
-                    resolve()
+                login(userInfo).then(response => {
+                    if (response.code == 1) {
+                        const data = response.result
+                        commit('SET_TOKEN', data.token)
+                        setToken(data.token)
+                    }
+                    resolve(response)
                 }).catch(error => {
                     reject(error)
                 })

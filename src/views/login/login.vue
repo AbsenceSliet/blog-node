@@ -53,16 +53,16 @@ export default {
         async login(formName){
             this.$refs[formName].validate(async (valid) =>{
                 if(valid){
-                    try{
-                        const res = await login({username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)})
-                        if(res.data.code == '1'){
+                    let userinfo = {username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)}
+                    this.$store.dispatch('Login',userinfo).then(res => {
+                        if(res.data.code == 1) {
                             this.$message({message:'登录成功', type: 'success'});
-                            localStorage.setItem('token', res.data.result.token)
-                            // this.$router.push({path:'/dashboard'})
+                        }else{
+                            this.$message({message:`${res.data.message}`, type: 'error'});
                         }
-                    } catch(err){
-                        console.log(err.response.status)
-                    }
+                    }).catch(error => {
+                        this.$message({message:`${error.message}`, type: 'error'});
+                    })
                 }
             })  
         }

@@ -37,7 +37,9 @@ export default new Vuex.Store({
         routers: [],
         addRouters: [],
     },
-    getters: {},
+    getters: {
+        permission_routers: state => state.routers,
+    },
     mutations: {
         SET_STATUS(state, status) {
             state.status = status

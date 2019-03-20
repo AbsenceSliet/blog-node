@@ -26,20 +26,25 @@ Vue.use(Router)
 export const defaultRouterMap = [{
     path: '/',
     redirect: '/dashboard',
+    hidden: true
 }, {
-    path: '/dashboard',
+    path: '',
     component: layout,
-    redirect: '/dashboard/index',
+    redirect: 'dashboard',
     children: [{
-        path: 'index',
-        component: dashboard
+        path: 'dashboard',
+        component: dashboard,
+        name:'Dashboard',
+        meta:{ title: 'dashboard', icon: 'dashboard'}
     }]
 }, {
     path: '/login',
-    component: login
+    component: login,
+    hidden: true
 }, {
     path: '/401',
-    component: unfind
+    component: unfind,
+    hidden: true
 }]
 
 export const asyncRouterMap = [{
@@ -47,25 +52,36 @@ export const asyncRouterMap = [{
     component: layout,
     redrect: '/permisson/index',
     meta: {
+        title: 'permission',
+        icon: 'lock',
         roles: ['admin', 'editor']
     },
     children: [{
         path: 'page',
         component: pageindex,
         meta: {
-            roles: ['admin']
+            roles: ['admin'],
+            title: 'pagepermission'
         }
     }, {
         path: 'directve',
-        component: directive
+        component: directive,
+        meta: { title: 'directivePermission' }
     }]
 }, {
     path: '/charts',
     component: layout,
+    meta:{
+        title: 'charts',
+        icon:'charts'
+    },
     children: [{
         path: 'index',
         component: charts,
-        name: 'ch'
+        name: 'ch',
+        meta:{
+            title:'ch-title'
+        }
     }]
 }]
 export default new Router({

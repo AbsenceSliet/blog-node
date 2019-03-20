@@ -18,6 +18,9 @@ const directive = r => require.ensure([], () => {
 const dashboard = r => require.ensure([], () => {
     r(require('@/views/dashboard/index'), 'dashboard')
 })
+const charts = r => require.ensure([], () => {
+    r(require('@/views/charts/index'), 'charts')
+})
 
 Vue.use(Router)
 export const defaultRouterMap = [{
@@ -55,6 +58,14 @@ export const asyncRouterMap = [{
     }, {
         path: 'directve',
         component: directive
+    }]
+}, {
+    path: '/charts',
+    component: layout,
+    children: [{
+        path: 'index',
+        component: charts,
+        name: 'ch'
     }]
 }]
 export default new Router({

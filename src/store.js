@@ -14,20 +14,20 @@ export const hasPermission = (roles, route) => {
     }
 }
 
-const filtersAsyncRouter = (routes, roles) => {
-    let res = []
+const filterAsyncRouter = (routes, roles) => {
+    const res = []
     routes.map(route => {
-        let tmp = {...route };
+        const tmp = {...route }
         if (hasPermission(roles, tmp)) {
             if (tmp.children) {
-                filtersAsyncRouter(route.children, roles)
-            } else {
-                res.push(tmp)
+                tmp.children = filterAsyncRouter(tmp.children, roles)
             }
+            res.push(tmp)
         }
     })
     return res
 }
+
 
 export default new Vuex.Store({
     state: {
@@ -37,10 +37,7 @@ export default new Vuex.Store({
         routers: [],
         addRouters: [],
     },
-    getters: {
-        addRouters: state => state.addRouters,
-        roles: state => state.roles
-    },
+    getters: {},
     mutations: {
         SET_STATUS(state, status) {
             state.status = status
@@ -92,10 +89,9 @@ export default new Vuex.Store({
                 if (roles.includes('admin')) {
                     accessRouters = asyncRouterMap
                 } else {
-                    accessRouters = filtersAsyncRouter(asyncRouterMap, roles)
+                    accessRouters = filterAsyncRouter(asyncRouterMap, roles)
                 }
                 commit('SET_ROUTERS', accessRouters)
-                console.log(accessRouters)
                 resolve()
             })
         },

@@ -4,13 +4,13 @@
             :default-active="$route.path"
             :collapse="isCollapse"
             :background-color="variables.menubg"
-            :text-color="variables.menuText"
-            :active-text-color="variables.menuActiveText"
+            :text-color="variables.menutext"
+            :active-text-color="variables.menuactivetext"
             :collapse-transition="false"
             mode="vertical"
         >
-            <!-- <sidebar-item v-for = "route in permission_routers" :key= "route.path" 
-            :item = "route" :base-path="route.path" /> -->
+            <sidebar-item v-for = "route in permission_routers" :key= "route.path" 
+            :item = "route" :base-path="route.path" />
         </el-menu>
     </el-scrollbar>
 </template>
@@ -35,9 +35,6 @@ export default {
         variables() {
             return variables
         }
-    },
-    created() {
-        console.log(this.variables)
     },
 }
 </script>

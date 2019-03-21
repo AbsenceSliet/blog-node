@@ -21,6 +21,9 @@ const dashboard = r => require.ensure([], () => {
 const charts = r => require.ensure([], () => {
     r(require('@/views/charts/index'), 'charts')
 })
+const linecharts = r => require.ensure([], () => {
+    r(require('@/views/charts/linecharts'), 'linecharts')
+})
 
 Vue.use(Router)
 export const defaultRouterMap = [{
@@ -51,6 +54,7 @@ export const asyncRouterMap = [{
     path: '/permisson',
     component: layout,
     redrect: '/permisson/index',
+    alwaysShow:true,
     meta: {
         title: 'permission',
         icon: 'lock',
@@ -81,6 +85,13 @@ export const asyncRouterMap = [{
         name: 'ch',
         meta:{
             title:'ch-title'
+        }
+    },{
+        path: 'linecharts',
+        component: linecharts,
+        name: 'line',
+        meta:{
+            title:'linecharts-title'
         }
     }]
 }]

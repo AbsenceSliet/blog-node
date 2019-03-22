@@ -38,25 +38,33 @@ export default new Vuex.Store({
         routers: [],
         addRouters: [],
         sidebar:{
-            opened: Cookies.get('sidebarStatus') ? Cookies.get('sidebarStatus') :true
-        }
+            opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') :true,
+            withoutAnimation: false
+        },
+         device:'desktop',
     },
     getters: {
         permission_routers: state => state.routers,
         sidebar: state => state.sidebar,
+        device: state => state.device,
     },
     mutations: {
         TOOGLE_SIDEBAR(state) {
             state.sidebar.opened = !state.sidebar.opened;
+            state.sidebar.withoutAnimation = false
             if(state.sidebar.opened){
                 Cookies.set('sidebarStatus', 1)
             }else{
                 Cookies.set('sidebarStatus', 0)
             }
         },
-        CLOSE_SIDEBAR(state) {
+        CLOSE_SIDEBAR(state, withoutAnimation) {
             state.sidebar.opened = false
             Cookies.set('sidebarStatus', 0)
+            state.sidebar.withoutAnimation = withoutAnimation
+        },
+        TOGGLE_DEVICE: (state, device) => {
+            state.device = device
         },
         SET_STATUS(state, status) {
             state.status = status
@@ -68,7 +76,7 @@ export default new Vuex.Store({
             state.roles = roles
         },
         SET_ROUTERS(state, routers) {
-            state.addRouters = routers;
+            state.addRouters = routers; 
             state.routers = defaultRouterMap.concat(routers)
         }
     },
@@ -76,8 +84,11 @@ export default new Vuex.Store({
         toggleSideBar({commit}){
             commit('TOOGLE_SIDEBAR')
         },
-        closeSideBar({ commit }) {
-            commit('CLOSE_SIDEBAR')
+        closeSideBar({ commit }, {withoutAnimation}) {
+            commit('CLOSE_SIDEBAR', withoutAnimation)
+        },
+        toggleDevice({ commit }, device) {
+            commit('TOGGLE_DEVICE', device)
         },
         Login({ commit }, userInfo) {
             return new Promise((resolve, reject) => {

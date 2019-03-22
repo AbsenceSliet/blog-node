@@ -8,13 +8,16 @@ export default {
     name:'Hamburger',
     props:{
         isActive:{
-           type:Boolean,
-           default:false
+           type: Boolean,
+           default: false
         },
         toogleClick:{
            type: Function,
            default: null
         } 
+    },
+    created(){
+        console.log(this.isActive)
     }
 }
 </script>

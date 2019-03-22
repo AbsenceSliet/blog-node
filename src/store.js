@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { login, getuserinfo } from '@/constants/api'
 import { setToken, removeToken } from '@/utils/token'
 import { asyncRouterMap, defaultRouterMap } from './router'
+import Cookies from  "js-cookie"
 
 Vue.use(Vuex)
 
@@ -36,11 +37,27 @@ export default new Vuex.Store({
         roles: [],
         routers: [],
         addRouters: [],
+        sidebar:{
+            opened: Cookies.get('sidebarStatus') ? Cookies.get('sidebarStatus') :true
+        }
     },
     getters: {
         permission_routers: state => state.routers,
+        sidebar: state => state.sidebar,
     },
     mutations: {
+        TOOGLE_SIDEBAR(state) {
+            state.sidebar.opened = !state.sidebar.opened;
+            if(state.sidebar.opened){
+                Cookies.set('sidebarStatus', 1)
+            }else{
+                Cookies.set('sidebarStatus', 0)
+            }
+        },
+        CLOSE_SIDEBAR(state) {
+            state.sidebar.opened = false
+            Cookies.set('sidebarStatus', 0)
+        },
         SET_STATUS(state, status) {
             state.status = status
         },
@@ -56,6 +73,12 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        toggleSideBar({commit}){
+            commit('TOOGLE_SIDEBAR')
+        },
+        closeSideBar({ commit }) {
+            commit('CLOSE_SIDEBAR')
+        },
         Login({ commit }, userInfo) {
             return new Promise((resolve, reject) => {
                 login(userInfo).then(response => {

@@ -22,7 +22,6 @@ export default {
     name:'sidebar',
     data(){
         return{
-            isCollapse:false
         }
     },
     components: {
@@ -30,10 +29,14 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'permission_routers'
+            'permission_routers',
+            'sidebar'
         ]),
         variables() {
             return variables
+        },
+        isCollapse(){
+            return !this.sidebar.opened
         }
     },
 }

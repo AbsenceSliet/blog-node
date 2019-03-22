@@ -77,7 +77,7 @@ export const asyncRouterMap = [{
     component: layout,
     meta:{
         title: 'charts',
-        icon:'charts'
+        icon:'chart'
     },
     children: [{
         path: 'index',

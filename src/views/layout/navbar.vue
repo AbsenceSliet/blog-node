@@ -23,8 +23,6 @@ export default {
     },
     methods: {
         toogleSidebar(){
-            console.log(this.$route);
-            
             this.$store.dispatch('toggleSideBar')
         }
     },

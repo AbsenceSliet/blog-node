@@ -78,6 +78,7 @@ export const asyncRouterMap = [{
     path: '/charts',
     component: layout,
     name:'Charts',
+    redirect: 'noredirect',
     meta:{
         title: 'charts',
         icon:'chart'

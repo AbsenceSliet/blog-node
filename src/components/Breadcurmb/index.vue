@@ -1,7 +1,7 @@
 <template>
     <el-breadcrumb class="app-breadcrumb" separator="/">
         <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-            <span class="no-redirect" v-if="index == levelList.length-1">{{item.meta.title}}</span>
+            <span class="no-redirect" v-if=" item.redirect==='noredirect' || index == levelList.length-1">{{item.meta.title}}</span>
             <a  v-else href="javascript:;"  @click.prevent="handlelink(item)">
                 {{item.meta.title}}</a>
         </el-breadcrumb-item>
@@ -24,7 +24,12 @@ export default {
             this.levelList = matched.filter(item => item.meta && item.meta.title )
         },
         handlelink(item){
-            console.log(item)
+            const { redirect, path } = item
+            if(redirect) {
+                this.$router.push(redirect)
+                return 
+            }
+            this.$router.push(path)
         }
     },
     watch: {

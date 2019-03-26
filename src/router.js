@@ -63,6 +63,7 @@ export const asyncRouterMap = [{
     children: [{
         path: 'page',
         component: pageindex,
+        name:'pagepermission',
         meta: {
             roles: ['admin'],
             title: 'pagepermission'
@@ -70,11 +71,13 @@ export const asyncRouterMap = [{
     }, {
         path: 'directve',
         component: directive,
+        name:'directivePermission',
         meta: { title: 'directivePermission' }
     }]
 }, {
     path: '/charts',
     component: layout,
+    name:'Charts',
     meta:{
         title: 'charts',
         icon:'chart'

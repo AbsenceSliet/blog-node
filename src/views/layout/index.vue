@@ -21,7 +21,7 @@ export default {
     mixins: [resizeMixin],
     components:{
         Sidebar,
-        Navbar
+        Navbar,
     },
     computed: {
         ...mapGetters([

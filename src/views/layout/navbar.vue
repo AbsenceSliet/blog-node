@@ -1,11 +1,13 @@
 <template>
     <div class="navbar">
         <hamburger class="hamburger-container" :toogle-click="toogleSidebar" :is-active="sidebar.opened"/> 
+         <breadcurmb class="breadcrumb-container"/>
     </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
+import Breadcurmb from '@/components/Breadcurmb'
 export default {
     props:{
 
@@ -16,10 +18,13 @@ export default {
         ])
     },
     components:{
-        Hamburger
+        Hamburger,
+        Breadcurmb
     },
     methods: {
         toogleSidebar(){
+            console.log(this.$route);
+            
             this.$store.dispatch('toggleSideBar')
         }
     },
@@ -40,5 +45,8 @@ export default {
         &:hover {
             background: rgba(0, 0, 0, .025)
         }
+    }
+    .breadcrumb-container {
+        float: left;
     }
 </style>

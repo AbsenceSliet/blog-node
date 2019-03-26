@@ -141,6 +141,8 @@ export default new Vuex.Store({
         LogOut({ commit }) {
             return new Promise((resolve) => {
                 commit('SET_TOKEN', '')
+                removeToken()
+                resolve()
             })
         }
     }

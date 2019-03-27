@@ -24,6 +24,9 @@ const charts = r => require.ensure([], () => {
 const linecharts = r => require.ensure([], () => {
     r(require('@/views/charts/linecharts'), 'linecharts')
 })
+const mavon = r => require.ensure([], () => {
+    r(require('@/views/mavoneditor/index'), 'mavon')
+})
 
 Vue.use(Router)
 export const defaultRouterMap = [{
@@ -96,6 +99,19 @@ export const asyncRouterMap = [{
         name: 'line',
         meta:{
             title:'linecharts-title'
+        }
+    }]
+},{
+    path: '/mavon',
+    component: layout,
+    redirect: 'noredirect',
+    children:[{
+        path: 'index',
+        component: mavon,
+        name: 'mavon',
+        meta:{
+            title:'mavonEditor',
+            icon:'mavon'
         }
     }]
 }]

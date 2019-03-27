@@ -27,6 +27,9 @@ const linecharts = r => require.ensure([], () => {
 const mavon = r => require.ensure([], () => {
     r(require('@/views/mavoneditor/index'), 'mavon')
 })
+const i18n = r => require.ensure([], () => {
+    r(require('@/views/i18n-view/index'), 'i18n')
+})
 
 Vue.use(Router)
 export const defaultRouterMap = [{
@@ -69,7 +72,7 @@ export const asyncRouterMap = [{
         name:'pagepermission',
         meta: {
             roles: ['admin'],
-            title: 'pagepermission'
+            title: 'pagePermission'
         }
     }, {
         path: 'directve',
@@ -91,14 +94,14 @@ export const asyncRouterMap = [{
         component: charts,
         name: 'ch',
         meta:{
-            title:'ch-title'
+            title:'mixinCharts'
         }
     },{
         path: 'linecharts',
         component: linecharts,
         name: 'line',
         meta:{
-            title:'linecharts-title'
+            title:'lineCharts'
         }
     }]
 },{
@@ -112,6 +115,19 @@ export const asyncRouterMap = [{
         meta:{
             title:'mavonEditor',
             icon:'mavon'
+        }
+    }]
+},{
+    path: '/i18n',
+    component: layout,
+    redirect: 'noredirect',
+    children:[{
+        path: 'index',
+        component: i18n,
+        name: 'I18n',
+        meta:{
+            title:'i18n',
+            icon:'international'
         }
     }]
 }]

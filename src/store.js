@@ -41,7 +41,8 @@ export default new Vuex.Store({
             opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') :true,
             withoutAnimation: false
         },
-         device:'desktop',
+        device:'desktop',
+        language: Cookies.get('language') || 'en',
     },
     getters: {
         permission_routers: state => state.routers,
@@ -72,6 +73,10 @@ export default new Vuex.Store({
         SET_TOKEN(state, token) {
             state.token = token
         },
+        SET_LANGUAGE(state, language){
+            state.language = language
+            Cookies.set('language', language)
+        },
         SET_ROLES(state, roles) {
             state.roles = roles
         },
@@ -81,6 +86,9 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        setLanguage({ commit }, language){
+            commit('SET_LANGUAGE', language)
+        },
         toggleSideBar({commit}){
             commit('TOOGLE_SIDEBAR')
         },

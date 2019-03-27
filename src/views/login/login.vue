@@ -4,13 +4,13 @@
             <section class="form_container" v-show= "showLogin">
                 <el-form :model="loginForm" ref="loginForm">
                     <el-form-item prop="username">
-                        <el-input v-model ="loginForm.username" placeholder="用户名"></el-input>
+                        <el-input v-model ="loginForm.username" :placeholder="$t('login.username')"></el-input>
                     </el-form-item>
                     <el-form-item prop="password">
-                        <el-input type="password" v-model ="loginForm.passward" placeholder="用户密码"></el-input>
+                        <el-input type="password" v-model ="loginForm.passward" :placeholder="$t('login.password')"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="login('loginForm')" class="login_btn">登陆</el-button>
+                        <el-button type="primary" @click="login('loginForm')" class="login_btn">{{$t('login.login')}}</el-button>
                     </el-form-item>
                 </el-form>
             </section>

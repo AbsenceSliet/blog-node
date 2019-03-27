@@ -1,0 +1,27 @@
+{
+    "route": {
+        "dashboard": "Dashboard",
+        "permission": "Permission",
+        "directivePermission": "Directive Permission",
+        "pagePermission": "Page Permission",
+        "charts": "Charts",
+        "mixinCharts": "Mixin Charts",
+        "lineCharts": "Line Charts",
+        "mavonEditor": "Mavon Editor",
+        "i18n": "I18n"
+    },
+    "navbar": {
+        "logOut": "Log Out",
+        "dashboard": "Dashboard",
+        "github": "Github"
+    },
+    "login": {
+        "username": "Username",
+        "password": "Password",
+        "login": "Log In"
+    },
+    "i18nView": {
+        "title": "Switch Language",
+        "note": "The internationalization of this project is based on vue-i18n"
+    }
+}

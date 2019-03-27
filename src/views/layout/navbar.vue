@@ -11,16 +11,16 @@
                 <el-dropdown-menu slot="dropdown">
                     <router-link to="/">
                         <el-dropdown-item>
-                        Dashboard
+                        {{$t('navbar.dashboard')}}
                         </el-dropdown-item>
                     </router-link>
                     <a target="_blank" href="https://github.com/AbsenceSliet/blog-node">
                         <el-dropdown-item>
-                        Github
+                        {{$t('navbar.github')}}
                         </el-dropdown-item>
                     </a>
                     <el-dropdown-item divided>
-                        <span style="display:block;" @click="logout">Log Out</span>
+                        <span style="display:block;" @click="logout">{{$t('navbar.logOut')}}</span>
                     </el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>

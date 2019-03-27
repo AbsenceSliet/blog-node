@@ -5,6 +5,7 @@ function resolve(dir) {
 }
 module.exports = {
     lintOnSave: process.env.NODE_ENV !== 'production',
+
     chainWebpack: (config) => {
         config.module
             .rule('svg')
@@ -25,6 +26,7 @@ module.exports = {
             .set('@', resolve('src'))
             .set('@assets', resolve('src/assets'))    
     },
+
     devServer: {
         proxy: {
             '/': {
@@ -36,5 +38,14 @@ module.exports = {
                 }
             }
         }
+    },
+
+    pluginOptions: {
+      i18n: {
+        locale: 'en',
+        fallbackLocale: 'en',
+        localeDir: 'locales',
+        enableInSFC: false
+      }
     }
 }

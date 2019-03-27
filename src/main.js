@@ -8,10 +8,11 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import '@/style/index.scss' 
+import '@/style/index.scss'
 
 import './permission' // permission control
 import '@/icons'
+import i18n from './i18n'
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(mavonEditor)
@@ -20,5 +21,6 @@ Vue.use(mavonEditor)
 new Vue({
     router,
     store,
+    i18n,
     render: h => h(App)
 }).$mount('#app')

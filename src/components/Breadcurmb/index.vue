@@ -1,13 +1,14 @@
 <template>
     <el-breadcrumb class="app-breadcrumb" separator="/">
         <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-            <span class="no-redirect" v-if=" item.redirect==='noredirect' || index == levelList.length-1">{{item.meta.title}}</span>
+            <span class="no-redirect" v-if=" item.redirect==='noredirect' || index == levelList.length-1">{{generatetitle(item.meta.title)}}</span>
             <a  v-else href="javascript:;"  @click.prevent="handlelink(item)">
-                {{item.meta.title}}</a>
+                {{generatetitle(item.meta.title)}}</a>
         </el-breadcrumb-item>
     </el-breadcrumb>
 </template>
 <script>
+import  generatetitle  from '@/utils/i18n'
 export default {
     data(){
         return {
@@ -15,6 +16,7 @@ export default {
         }
     },
     methods: {
+        generatetitle,
         getBreadcrumb(){
             let matched = this.$route.matched.filter(item => item.name)
             let first = matched[0]

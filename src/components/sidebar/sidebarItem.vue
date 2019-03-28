@@ -1,16 +1,16 @@
 <template>
     <div v-if="!item.hidden" class="menu-wrapper">
-        <template v-if="hasOneShowingChild(item.children,item) && !item.alwaysShow">
+        <template v-if="hasOneShowingChild(item.children,item)  && (!onlyOneChild.children||onlyOneChild.noShowingChildren) && !item.alwaysShow">
             <app-link :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-                <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="generateTitle(onlyOneChild.meta.title)" />
+                <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="generatetitle(onlyOneChild.meta.title)" />
                 </el-menu-item>
             </app-link>
         </template>
 
         <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
             <template slot="title">
-                <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="generateTitle(item.meta.title)" />
+                <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="generatetitle(item.meta.title)" />
             </template>
             <sidebar-item
                 v-for="child in item.children"
@@ -27,7 +27,7 @@ import path from 'path'
 import Item from "./item"
 import AppLink from "./link"
 import { isExternal } from '@/utils/validate'
-import  generateTitle  from '@/utils/i18n'
+import  generatetitle  from '@/utils/i18n'
 export default {
     name:'SidebarItem',
     components:{
@@ -35,8 +35,9 @@ export default {
         AppLink
     },
     data(){
+        onlyOneChild :null
         return {
-            onlyOneChild :null,
+            
         }
     },
     props:{
@@ -54,7 +55,7 @@ export default {
         }
     },
     methods: {
-        generateTitle,
+        generatetitle,
         resolvePath(routePath) {
             if (isExternal(routePath)) {
                 return routePath
@@ -78,12 +79,13 @@ export default {
 
             // Show parent if there are no child router to display
             if (showingChildren.length === 0) {
-                this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
+                this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
+                
                 return true
             }
 
             return false
-            },
+        },
     },
 }
 </script>

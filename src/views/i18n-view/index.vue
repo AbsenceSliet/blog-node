@@ -25,8 +25,8 @@ export default {
             },
             set(lang){
                 console.log(this.$i18n.locale,lang)
-                //  this.$i18n.locale = lang
-                //  this.$store.dispatch('setLanguage', lang)
+                this.$i18n.locale = lang
+                this.$store.dispatch('setLanguage', lang)
             }
         }
     }

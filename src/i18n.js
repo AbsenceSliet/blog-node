@@ -15,6 +15,7 @@ function loadLocaleMessages () {
   })
   return messages
 }
+console.log(loadLocaleMessages(),'loadLocaleMessages');
 
 export default new VueI18n({
   locale: process.env.VUE_APP_I18N_LOCALE || 'en',

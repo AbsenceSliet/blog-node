@@ -40,12 +40,8 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {
-            console.log(1);
-
             next()
         } else {
-            console.log(2);
-
             next(`/login?redirect=${to.path}`)
         }
     }

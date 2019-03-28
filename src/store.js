@@ -87,6 +87,8 @@ export default new Vuex.Store({
     },
     actions: {
         setLanguage({ commit }, language){
+            
+            
             commit('SET_LANGUAGE', language)
         },
         toggleSideBar({commit}){

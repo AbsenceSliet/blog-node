@@ -60,7 +60,7 @@ export const asyncRouterMap = [{
     path: '/permisson',
     component: layout,
     redrect: '/permisson/index',
-    alwaysShow:true,
+    alwaysShow: true,
     meta: {
         title: 'permission',
         icon: 'lock',
@@ -69,15 +69,15 @@ export const asyncRouterMap = [{
     children: [{
         path: 'page',
         component: pageindex,
-        name:'pagepermission',
+        name:'Pagepermission',
         meta: {
-            roles: ['admin'],
-            title: 'pagePermission'
+            title: 'pagePermission',
+            roles: ['admin']
         }
     }, {
         path: 'directve',
         component: directive,
-        name:'directivePermission',
+        name:'DirectivePermission',
         meta: { title: 'directivePermission' }
     }]
 }, {
@@ -92,14 +92,14 @@ export const asyncRouterMap = [{
     children: [{
         path: 'index',
         component: charts,
-        name: 'ch',
+        name: 'MixinCharts',
         meta:{
             title:'mixinCharts'
         }
     },{
         path: 'linecharts',
         component: linecharts,
-        name: 'line',
+        name: 'LineCharts',
         meta:{
             title:'lineCharts'
         }
@@ -111,7 +111,7 @@ export const asyncRouterMap = [{
     children:[{
         path: 'index',
         component: mavon,
-        name: 'mavon',
+        name: 'Mavon',
         meta:{
             title:'mavonEditor',
             icon:'mavon'

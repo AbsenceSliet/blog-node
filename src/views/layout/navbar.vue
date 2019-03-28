@@ -3,6 +3,9 @@
         <hamburger class="hamburger-container" :toogle-click="toogleSidebar" :is-active="sidebar.opened"/> 
          <breadcurmb class="breadcrumb-container"/>
         <div class="right-menu">
+            <div v-if = "device !== 'mobile'" style="display:inline-block">
+                <switch-lang class="right-menu-item hover-effect" />
+            </div>
             <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
                 <div class="avatar-wrapper">
                     <img src="http://up.qqjia.com/z//26/tu32814_1.jpg" class="user-avatar">
@@ -31,18 +34,21 @@
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcurmb from '@/components/Breadcurmb'
+import SwitchLang from '@/components/SwitchLang'
 export default {
     props:{
 
     },
     computed:{
         ...mapGetters([
-            'sidebar'
+            'sidebar',
+            'device'
         ])
     },
     components:{
         Hamburger,
-        Breadcurmb
+        Breadcurmb,
+        SwitchLang
     },
     methods: {
         toogleSidebar(){

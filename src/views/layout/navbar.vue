@@ -4,6 +4,7 @@
          <breadcurmb class="breadcrumb-container"/>
         <div class="right-menu">
             <div v-if = "device !== 'mobile'" style="display:inline-block">
+                <full-screen class="right-menu-item hover-effect" />
                 <switch-lang class="right-menu-item hover-effect" />
             </div>
             <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
@@ -35,6 +36,7 @@ import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcurmb from '@/components/Breadcurmb'
 import SwitchLang from '@/components/SwitchLang'
+import FullScreen from '@/components/FullScreen'
 export default {
     props:{
 
@@ -48,7 +50,8 @@ export default {
     components:{
         Hamburger,
         Breadcurmb,
-        SwitchLang
+        SwitchLang,
+        FullScreen
     },
     methods: {
         toogleSidebar(){

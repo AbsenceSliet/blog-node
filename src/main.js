@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import '@/style/index.scss'
+import fullscreen from 'vue-fullscreen'
 
 import './permission' // permission control
 import '@/icons'
@@ -16,6 +17,7 @@ import i18n from './i18n'
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(mavonEditor)
+Vue.use(fullscreen)
 
 
 new Vue({

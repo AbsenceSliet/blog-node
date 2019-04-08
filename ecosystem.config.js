@@ -29,7 +29,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'git@github.com:AbsenceSliet/blog-node.git',
             path: '/www/blog_node/production',
-            'post-deploy': 'npm --registry https://registry.npm.taobao.org install  && npm run build   && pm2 reload ecosystem.config.js --env production'
+            'post-deploy': 'yarn   && yarn run build   && pm2 reload ecosystem.config.js --env production'
         },
         dev: {
             user: 'node',

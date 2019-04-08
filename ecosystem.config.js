@@ -5,17 +5,17 @@ module.exports = {
      */
     apps: [
 
+        // First application
         {
-            name: 'blog-node',
-            script: 'app.js',
+            name: 'API',
+            script: './server/start.js',
             env: {
                 COMMON_VARIABLE: 'true'
             },
             env_production: {
-                NODE_ENV: 'production',
-                HOST: '0.0.0.0',
+                NODE_ENV: 'production'
             }
-        }
+        },
     ],
 
     /**
@@ -24,12 +24,12 @@ module.exports = {
      */
     deploy: {
         production: {
-            user: 'root',
+            user: 'Garen',
             host: '47.102.154.71',
             ref: 'origin/master',
-            repo: 'https://github.com/AbsenceSliet/blog-node.git',
-            path: '/var/www/production',
-            'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production'
+            repo: 'git@github.com:AbsenceSliet/blog-node.git',
+            path: '/www/blog_node/production',
+            'post-deploy': 'yarn  && yarn run build   && pm2 reload ecosystem.config.js --env production'
         },
         dev: {
             user: 'node',
@@ -37,7 +37,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'git@github.com:repo.git',
             path: '/var/www/development',
-            'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env dev',
+            'post-deploy': 'npm --registry https://registry.npm.taobao.org install && pm2 reload ecosystem.config.js --env dev',
             env: {
                 NODE_ENV: 'dev'
             }

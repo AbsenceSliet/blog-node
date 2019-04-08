@@ -5,7 +5,12 @@ function resolve(dir) {
 }
 module.exports = {
     lintOnSave: process.env.NODE_ENV !== 'production',
-
+    // 生产环境是否生成 sourceMap 文件
+    productionSourceMap: false,
+    // 开启 CSS source maps?
+    css: {
+        sourceMap: false,
+    },
     chainWebpack: (config) => {
         config.module
             .rule('svg')
@@ -24,7 +29,7 @@ module.exports = {
             })
         config.resolve.alias
             .set('@', resolve('src'))
-            .set('@assets', resolve('src/assets'))    
+            .set('@assets', resolve('src/assets'))
     },
 
     devServer: {
@@ -41,11 +46,11 @@ module.exports = {
     },
 
     pluginOptions: {
-      i18n: {
-        locale: 'en',
-        fallbackLocale: 'en',
-        localeDir: 'locales',
-        enableInSFC: false
-      }
+        i18n: {
+            locale: 'en',
+            fallbackLocale: 'en',
+            localeDir: 'locales',
+            enableInSFC: false
+        }
     }
 }

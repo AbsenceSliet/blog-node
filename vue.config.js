@@ -3,6 +3,9 @@ const path = require('path')
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
+
+const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088' : 'http://47.102.154.71:8088'
+
 module.exports = {
     lintOnSave: process.env.NODE_ENV !== 'production',
     // 生产环境是否生成 sourceMap 文件
@@ -35,7 +38,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/': {
-                target: 'http://127.0.0.1:8088', //对应自己的接口
+                target: BASE_URL, //对应自己的接口
                 changeOrigin: true,
                 ws: true,
                 pathRewrite: {

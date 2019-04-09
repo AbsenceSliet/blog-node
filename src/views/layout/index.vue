@@ -10,8 +10,8 @@
     </div>
 </template>
 <script>
-import Sidebar from  './sidebar';
-import Navbar from  './navbar';
+// import Sidebar from  './sidebar';
+// import Navbar from  './navbar';
 import { mapGetters } from 'vuex'
 import resizeMixin from '@/utils/resize' 
 export default {
@@ -21,8 +21,8 @@ export default {
     },
     mixins: [resizeMixin],
     components:{
-        Sidebar,
-        Navbar,
+        // Sidebar,
+        // Navbar,
     },
     computed: {
         ...mapGetters([

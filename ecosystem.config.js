@@ -8,7 +8,7 @@ module.exports = {
         // First application
         {
             name: 'API',
-            script: './server/start.js',
+            script: '',
             env: {
                 COMMON_VARIABLE: 'true'
             },

@@ -12,9 +12,7 @@ export default {
         }
     },
     methods: {
-        fullScreen(){
-            console.log(this.$root.$el);
-            
+        fullScreen(){            
             this.$fullscreen.toggle(this.$root.$el.querySelector('.app-wrapper'), {
                 wrap: false,
                 callback: this.fullscreenChange

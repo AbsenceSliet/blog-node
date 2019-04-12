@@ -15,8 +15,6 @@ service.interceptors.request.use(
     config => {
         let { headers } = config;
         let token = localStorage.getItem(TOKEN)
-        console.log(config, 'asdasd')
-
         if (token) {
             Object.assign(headers, {
                 Authorization: `Bearer ${token}`
@@ -36,7 +34,6 @@ service.interceptors.response.use(
         }
         return response
     }, error => {
-        console.log(error, 'error----');
         if (error && error.response) {
             switch (error.response.status) {
                 case 400:
@@ -79,7 +76,6 @@ service.interceptors.response.use(
                     error.message = `连接错误${error.response.status}`
             }
         } else {
-            console.log(123)
             error.message = "连接到服务器失败"
         }
         return Promise.reject(error);

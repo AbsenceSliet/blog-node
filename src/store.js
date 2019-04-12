@@ -132,6 +132,7 @@ export default new Vuex.Store({
                         commit('SET_STATUS', data.userstatus)
                         commit('SET_ROLES', data.roles)
                         commit('SET_USERINFO', data)
+                        commit('SET_AVATAR', data.avatar)
                     }
                     resolve(response)
                 }).catch(error => {
@@ -167,11 +168,11 @@ export default new Vuex.Store({
             })
         },
         uploadAvatar({ commit }, data) {
-            console.log(data)
             return new Promise((resolve, reject) => {
                 uploadavatar(data).then(res => {
-
-                    console.log(res)
+                    if (res.data.code == 1) {
+                        commit('SET_AVATAR', res.data.result.image_path)
+                    }
                     resolve(res)
                 }, err => {
                     reject(err)

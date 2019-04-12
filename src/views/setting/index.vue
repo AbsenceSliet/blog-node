@@ -18,21 +18,10 @@
                 <el-form-item :label="$t('setting.avatar')">
                     <div class="avatar-uploader">
                         <div class="el-upload">
-                            <img v-if="userinfo.avatar" :src="userinfo.avatar" class="avatar">
+                            <img v-if="avatar" :src="avatar" class="avatar">
                             <input type="file" class="upload-input" @change="uploadimage" >
                         </div>
                     </div>
-<!--                     
-                        <el-upload id="avatar-uploader"
-                        class="avatar-uploader"
-                        action="/api/user/auth/upload/avatar"
-                        :headers="fetchheader"
-                        :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
-                        :before-upload="beforeAvatarUpload">
-                        <img v-if="userinfo.avatar" :src="userinfo.avatar" class="avatar">
-                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                        </el-upload> -->
                 </el-form-item>     
             </el-form>
 
@@ -95,6 +84,7 @@ export default {
     },
     computed: {
         ...mapGetters([
+            'avatar',
             'userinfo'
         ]),
         userrole(){
@@ -102,24 +92,19 @@ export default {
         }
     },
     methods:{
-        handleAvatarSuccess(){
-
-        },
         uploadimage(e){
-            console.log(e)
             let formData = new FormData();
             formData.append('file', e.target.files[0]);
-            console.log(formData)
             this.$store.dispatch('uploadAvatar',formData).then(res=>{
-                
-            },err=>{})
-        },
-        beforeAvatarUpload(){
-
+                if(res.data.code == 1){
+                    this.$message({message:'上传图片成功！', type: 'success'});
+                }else{
+                    this.$message.error('上传图片失败！');
+                }
+            },err=>{
+                this.$message.error('上传图片失败！');
+            })
         }
-    },
-    mounted(){
-        console.log(this.$store.state)
     }
 }
 </script>

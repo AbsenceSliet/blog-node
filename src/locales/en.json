@@ -23,5 +23,12 @@
     "i18nView": {
         "title": "Switch Language",
         "note": "The internationalization of this project is based on vue-i18n"
+    },
+    "setting": {
+        "title": "Persional Setting",
+        "name": "Name",
+        "createTime": "Create Time",
+        "permission": "User Permison",
+        "avatar": "Change Avatar"
     }
 }

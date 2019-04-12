@@ -30,6 +30,9 @@ const mavon = r => require.ensure([], () => {
 const i18n = r => require.ensure([], () => {
     r(require('@/views/i18n-view/index'), 'i18n')
 })
+const setting = r => require.ensure([], () => {
+    r(require('@/views/setting/index'), 'setting')
+})
 
 Vue.use(Router)
 export const defaultRouterMap = [{
@@ -43,8 +46,8 @@ export const defaultRouterMap = [{
     children: [{
         path: 'dashboard',
         component: dashboard,
-        name:'Dashboard',
-        meta:{ title: 'dashboard', icon: 'dashboard'}
+        name: 'Dashboard',
+        meta: { title: 'dashboard', icon: 'dashboard' }
     }]
 }, {
     path: '/login',
@@ -69,7 +72,7 @@ export const asyncRouterMap = [{
     children: [{
         path: 'page',
         component: pageindex,
-        name:'Pagepermission',
+        name: 'Pagepermission',
         meta: {
             title: 'pagePermission',
             roles: ['admin']
@@ -77,57 +80,70 @@ export const asyncRouterMap = [{
     }, {
         path: 'directve',
         component: directive,
-        name:'DirectivePermission',
+        name: 'DirectivePermission',
         meta: { title: 'directivePermission' }
     }]
 }, {
     path: '/charts',
     component: layout,
-    name:'Charts',
+    name: 'Charts',
     redirect: 'noredirect',
-    meta:{
+    meta: {
         title: 'charts',
-        icon:'chart'
+        icon: 'chart'
     },
     children: [{
         path: 'index',
         component: charts,
         name: 'MixinCharts',
-        meta:{
-            title:'mixinCharts'
+        meta: {
+            title: 'mixinCharts'
         }
-    },{
+    }, {
         path: 'linecharts',
         component: linecharts,
         name: 'LineCharts',
-        meta:{
-            title:'lineCharts'
+        meta: {
+            title: 'lineCharts'
         }
     }]
-},{
+}, {
     path: '/mavon',
     component: layout,
     redirect: 'noredirect',
-    children:[{
+    children: [{
         path: 'index',
         component: mavon,
         name: 'Mavon',
-        meta:{
-            title:'mavonEditor',
-            icon:'mavon'
+        meta: {
+            title: 'mavonEditor',
+            icon: 'mavon'
         }
     }]
-},{
+}, {
     path: '/i18n',
     component: layout,
     redirect: 'noredirect',
-    children:[{
+    children: [{
         path: 'index',
         component: i18n,
         name: 'I18n',
-        meta:{
-            title:'i18n',
-            icon:'international'
+        meta: {
+            title: 'i18n',
+            icon: 'international'
+        }
+    }]
+}, {
+    path: '/setting',
+    component: layout,
+    redirect: 'noredirect',
+    children: [{
+        path: 'index',
+        component: setting,
+        name: 'Setting',
+        meta: {
+            title: 'setting',
+            icon: 'setting'
         }
     }]
 }]

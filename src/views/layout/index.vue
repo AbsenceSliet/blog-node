@@ -1,17 +1,16 @@
 <template>
     <div class="app-wrapper" :class="sidebarClass">
         <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"/>
-        <!-- <sidebar class="sidebar-container" /> -->
+        <sidebar class="sidebar-container" />
         <div class="main-container">
-            <!-- <navbar  /> -->
-            ashdgasjdgasd
+            <navbar  />
             <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
-// import Sidebar from  './sidebar';
-// import Navbar from  './navbar';
+import Sidebar from  './sidebar';
+import Navbar from  './navbar';
 import { mapGetters } from 'vuex'
 import resizeMixin from '@/utils/resize' 
 export default {
@@ -21,8 +20,8 @@ export default {
     },
     mixins: [resizeMixin],
     components:{
-        // Sidebar,
-        // Navbar,
+        Sidebar,
+        Navbar,
     },
     computed: {
         ...mapGetters([

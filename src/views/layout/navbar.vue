@@ -9,7 +9,7 @@
             </div>
             <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
                 <div class="avatar-wrapper">
-                    <img src="http://up.qqjia.com/z//26/tu32814_1.jpg" class="user-avatar">
+                    <img :src="userinfo.avatar" class="user-avatar">
                     <i class="el-icon-caret-bottom"/>
                 </div>
                 <el-dropdown-menu slot="dropdown">
@@ -44,7 +44,8 @@ export default {
     computed:{
         ...mapGetters([
             'sidebar',
-            'device'
+            'device',
+            'userinfo'
         ])
     },
     components:{

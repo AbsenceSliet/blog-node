@@ -15,12 +15,15 @@ service.interceptors.request.use(
     config => {
         let { headers } = config;
         let token = localStorage.getItem(TOKEN)
+        console.log(config, 'asdasd')
+
         if (token) {
             Object.assign(headers, {
                 Authorization: `Bearer ${token}`
             })
         }
         return config
+
     }, error => {
         return Promise.reject(error);
     }

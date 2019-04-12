@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { login, getuserinfo } from '@/constants/api'
+import { login, getuserinfo, uploadavatar } from '@/constants/api'
 import { setToken, removeToken } from '@/utils/token'
 import { asyncRouterMap, defaultRouterMap } from './router'
-import Cookies from  "js-cookie"
+import Cookies from "js-cookie"
 
 Vue.use(Vuex)
 
@@ -37,25 +37,29 @@ export default new Vuex.Store({
         roles: [],
         routers: [],
         addRouters: [],
-        sidebar:{
-            opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') :true,
+        userinfo: '',
+        avatar: '',
+        sidebar: {
+            opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
             withoutAnimation: false
         },
-        device:'desktop',
+        device: 'desktop',
         language: Cookies.get('language') || 'en',
     },
     getters: {
         permission_routers: state => state.routers,
         sidebar: state => state.sidebar,
         device: state => state.device,
+        userinfo: state => state.userinfo,
+        avatar: state => state.avatar
     },
     mutations: {
         TOOGLE_SIDEBAR(state) {
             state.sidebar.opened = !state.sidebar.opened;
             state.sidebar.withoutAnimation = false
-            if(state.sidebar.opened){
+            if (state.sidebar.opened) {
                 Cookies.set('sidebarStatus', 1)
-            }else{
+            } else {
                 Cookies.set('sidebarStatus', 0)
             }
         },
@@ -73,7 +77,13 @@ export default new Vuex.Store({
         SET_TOKEN(state, token) {
             state.token = token
         },
-        SET_LANGUAGE(state, language){
+        SET_USERINFO(state, info) {
+            state.userinfo = info
+        },
+        SET_AVATAR(state, avatar) {
+            state.avatar = avatar
+        },
+        SET_LANGUAGE(state, language) {
             state.language = language
             Cookies.set('language', language)
         },
@@ -81,20 +91,20 @@ export default new Vuex.Store({
             state.roles = roles
         },
         SET_ROUTERS(state, routers) {
-            state.addRouters = routers; 
+            state.addRouters = routers;
             state.routers = defaultRouterMap.concat(routers)
         }
     },
     actions: {
-        setLanguage({ commit }, language){
-            
-            
+        setLanguage({ commit }, language) {
+
+
             commit('SET_LANGUAGE', language)
         },
-        toggleSideBar({commit}){
+        toggleSideBar({ commit }) {
             commit('TOOGLE_SIDEBAR')
         },
-        closeSideBar({ commit }, {withoutAnimation}) {
+        closeSideBar({ commit }, { withoutAnimation }) {
             commit('CLOSE_SIDEBAR', withoutAnimation)
         },
         toggleDevice({ commit }, device) {
@@ -121,6 +131,7 @@ export default new Vuex.Store({
                         const data = response.data.result
                         commit('SET_STATUS', data.userstatus)
                         commit('SET_ROLES', data.roles)
+                        commit('SET_USERINFO', data)
                     }
                     resolve(response)
                 }).catch(error => {
@@ -153,6 +164,18 @@ export default new Vuex.Store({
                 commit('SET_TOKEN', '')
                 removeToken()
                 resolve()
+            })
+        },
+        uploadAvatar({ commit }, data) {
+            console.log(data)
+            return new Promise((resolve, reject) => {
+                uploadavatar(data).then(res => {
+
+                    console.log(res)
+                    resolve(res)
+                }, err => {
+                    reject(err)
+                })
             })
         }
     }

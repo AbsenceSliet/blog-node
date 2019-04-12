@@ -23,5 +23,12 @@
     "i18nView": {
         "title": "切换语言",
         "note": "本项目国际化基于 vue-i18n"
+    },
+    "setting": {
+        "title": "个人设置",
+        "name": "姓名",
+        "createTime": "注册时间",
+        "permission": "管理员权限",
+        "avatar": "更换头像"
     }
 }

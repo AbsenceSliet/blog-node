@@ -8,7 +8,11 @@
         "mixinCharts": "混合图表",
         "lineCharts": "线图表",
         "mavonEditor": "Markdown",
-        "i18n": "国际化"
+        "i18n": "国际化",
+        "article": "博客管理",
+        "articleList": "文章管理",
+        "createArticle": "创建文章",
+        "category": "分类管理"
     },
     "navbar": {
         "logOut": "退出",

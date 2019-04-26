@@ -8,7 +8,11 @@
         "mixinCharts": "Mixin Charts",
         "lineCharts": "Line Charts",
         "mavonEditor": "Mavon Editor",
-        "i18n": "I18n"
+        "i18n": "I18n",
+        "article": "Article",
+        "articleList": "Article List",
+        "createArticle": "Create Article",
+        "category": "Category"
     },
     "navbar": {
         "logOut": "Log Out",

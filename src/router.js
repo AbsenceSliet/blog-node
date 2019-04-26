@@ -33,7 +33,15 @@ const i18n = r => require.ensure([], () => {
 const setting = r => require.ensure([], () => {
     r(require('@/views/setting/index'), 'setting')
 })
-
+const article = r => require.ensure([], () => {
+    r(require('@/views/article/index'), 'article')
+})
+const createArticle = r => require.ensure([], () => {
+    r(require('@/views/article/createArticle'), 'createArticle')
+})
+const category = r => require.ensure([], () => {
+    r(require('@/views/article/category'), 'category')
+})
 Vue.use(Router)
 export const defaultRouterMap = [{
     path: '/',
@@ -82,6 +90,40 @@ export const asyncRouterMap = [{
         component: directive,
         name: 'DirectivePermission',
         meta: { title: 'directivePermission' }
+    }]
+}, {
+    path: '/article',
+    component: layout,
+    redrect: '/article/index',
+    meta: {
+        title: 'article',
+        icon: 'article',
+        roles: ['admin']
+    },
+    children: [{
+        path: 'index',
+        component: article,
+        name: 'articleList',
+        meta: {
+            title: 'articleList',
+            roles: ['admin']
+        }
+    }, {
+        path: 'create',
+        component: createArticle,
+        name: 'createArticle',
+        meta: {
+            title: 'createArticle',
+            roles: ['admin']
+        }
+    }, {
+        path: 'category',
+        component: category,
+        name: 'category',
+        meta: {
+            title: 'category',
+            roles: ['admin']
+        }
     }]
 }, {
     path: '/charts',

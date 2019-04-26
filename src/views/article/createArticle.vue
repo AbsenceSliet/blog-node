@@ -31,7 +31,13 @@
                 <el-input v-model="articleContent.tag"  @keyup.enter.native="inputTag"
                 @blur="inputTag"></el-input>
             </el-form-item>
+            <el-form-item label="正文">
+                <mavon-editor v-model="mavon"/>
+            </el-form-item>
         </el-form>
+        <div class="articleSave">
+            <el-button type="primary" ><svg-icon icon-class= "send"/> 发布</el-button>
+        </div>
     </div>
 </template>
 <script>
@@ -62,6 +68,7 @@ export default {
             value: '选项5',
             label: '北京烤鸭'
             }],
+            mavon:''
         }
     },
     computed:{

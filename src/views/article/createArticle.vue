@@ -9,7 +9,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col  :md="8">
-                    <el-form-item label="文章标题">
+                    <el-form-item label="文章分类">
                         <el-select v-model="category_value" placeholder="请选择">
                             <el-option
                             v-for="item in options"

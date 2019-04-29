@@ -36,12 +36,13 @@
             </el-form-item>
         </el-form>
         <div class="articleSave">
-            <el-button type="primary" ><svg-icon icon-class= "send"/> 发布</el-button>
+            <el-button type="primary" @click="create"><svg-icon icon-class= "send"/> 发布</el-button>
         </div>
     </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import {  createarticle } from '@/constants/api'
 export default {
     data() {
         return {
@@ -86,6 +87,25 @@ export default {
         },
         closeTag(tag){
             this.tags.length > 0 ? this.tags.splice(this.tags.indexOf(tag), 1) :''
+        },
+        create(){
+            let createItem = {
+                title: this.articleContent.title,
+                abstract :this.articleContent.abstract,
+                tags:this.tags,
+                content:this.mavon,
+                category_id:'1'
+            }
+            createarticle(createItem).then((res)=>{
+                if(res.data.code == 1){
+                    this.$message({message:`${res.data.message}`, type: 'success'});
+                    this.$router.push({ path: '/article/index' })
+                }else{
+                    this.$message({message:`${res.data.message}`, type: 'error'});
+                }
+            }).catch(err=>{
+                
+            })
         }
     },
 }
@@ -103,6 +123,5 @@ export default {
             display: flex
         .tags-warpper
             .tag
-                margin: 0 10px 10px
-        
+                margin: 0 10px 10px    
 </style>

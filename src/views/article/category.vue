@@ -34,11 +34,11 @@
                     <el-input v-model="categoryForm.name"></el-input>
                 </el-form-item>
                 <el-form-item label="同级分类排名">
-                    <el-input v-model.number="categoryForm.sortnum"></el-input>
+                    <el-input v-model.number="categoryForm.level"></el-input>
                 </el-form-item>
                 <el-form-item label="前台是否可视">
-                    <el-radio v-model="categoryForm.radio" label="1">是</el-radio>
-                    <el-radio v-model="categoryForm.radio" label="2">否</el-radio>
+                    <el-radio v-model="categoryForm.visual" label="1">是</el-radio>
+                    <el-radio v-model="categoryForm.visual" label="0">否</el-radio>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="saveCategory('categoryForm')">保存</el-button>
@@ -51,28 +51,31 @@
 export default {
     data() {
         return {
-            category:[{
-                id:1111,
-                name:'Node.js',
-                sortnum:'1'
-            }],
-            categoryItem:[{label:'分类ID',prop:'id'},{label:'分类名称',prop:'name'},{label:'同级排序',prop:'sortnum'}],
+            category:[],
+            categoryItem:[{label:'分类ID',prop:'id'},{label:'分类名称',prop:'name'},{label:'同级排序',prop:'visual'}],
             dialogTitle:'添加新分类',
             dialogVisible:false,
             categoryForm:{
                 name:'',
-                sortnum:'',
-                radio:'1'
+                level:'',
+                visual:'1'
             }
         }
     },
     methods: {
+        init(){
+            this.$store.dispatch('categoryList').then(res=>{
+                if(res.code == 1){
+                    this.category = res.data.result
+                }
+            })
+        },
         createCategory(){
             let args = Array.from(arguments)
             if(args.length>0){
                 this.categoryForm = {
                     name:args[1].name,
-                    sortnum:args[1].sortnum
+                    level:args[1].level
                 }
             }
             this.dialogVisible = true
@@ -83,12 +86,12 @@ export default {
         saveCategory(form){
             this.$refs[form].validate(valid=>{
                 if(valid){
-                    this.category.push({id:'689',name:this.categoryForm.name,sortnum:this.categoryForm.sortnum})
+                    this.category.push({id:'689',name:this.categoryForm.name,level:this.categoryForm.level})
                     this.dialogVisible =false
                     this.categoryForm = {
                         name:'',
-                        sortnum:'',
-                        radio:'1'
+                        level:'',
+                        visual:'1'
                     }
                 }else{
 
@@ -98,11 +101,14 @@ export default {
         closeDialog(){
             this.categoryForm = {
                 name:'',
-                sortnum:'',
-                radio:'1'
+                level:'',
+                visual:'1'
             }
         }
     },
+    mounted(){
+        this.init()
+    }
 }
 </script>
 <style lang="sass" scoped>

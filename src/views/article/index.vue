@@ -1,6 +1,6 @@
 <template>
     <div class="article-wrapper">
-        <div class="article-list" v-if="!tableData">
+        <div class="article-list" v-if="listData">
             <el-row :gutter="10" class="article-list-header">
                 <el-col :xs="8">
                     <el-button
@@ -15,7 +15,7 @@
                 </el-col>
                 <el-col :xs="16"></el-col>
             </el-row>
-            <el-table :data="tableData" row-key="id" border lazy @selection-change="selectionChange" 
+            <el-table :data="listData" row-key="id" border lazy @selection-change="selectionChange" 
             tooltip-effect="dark" >
                 <el-table-column
                 type="selection"
@@ -68,14 +68,8 @@
 export default {
     data() {
         return {
-            tableTitle:[{label:' 分类',prop:'category',sortable:true},{label:'标题',prop:'title',sortable:false},{label:'发布时间',prop:'create_time',sortable:true},{label:'修改时间',prop:'modified_time',sortable:true}],
-            tableData:[{
-                id:1,
-                category:'Node.js',
-                title:'ajhsdajhsgd',
-                create_time:'2016-05-02',
-                modified_time:'2016-05-09'
-            }],
+            tableTitle:[{label:' 分类',prop:'category',sortable:true},{label:'标题',prop:'title',sortable:false},{label:'发布时间',prop:'create_time',sortable:true},{label:'修改时间',prop:'update_time',sortable:true}],
+            listData:[],
             selectArticles:[],
             currentPage:1,
             pageSize:100,
@@ -84,6 +78,15 @@ export default {
         }
     },
     methods: {
+        init_data(){
+            this.$store.dispatch('articleList').then(res=>{
+                if(res.data.code == 1){
+                    this.listData = res.data.result
+                }
+            }).catch(err=>{
+
+            })
+        },
         handleEdit(index, row) {
             console.log(index, row);
         },
@@ -105,6 +108,9 @@ export default {
         createArticle(){
             this.$router.push({path:'/article/create'})
         }
+    },
+    mounted(){
+        this.init_data()
     }
 }
 </script>

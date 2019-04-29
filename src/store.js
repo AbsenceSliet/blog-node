@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { login, getuserinfo, uploadavatar } from '@/constants/api'
+import { login, getuserinfo, uploadavatar, articlelist, categorylist } from '@/constants/api'
 import { setToken, removeToken } from '@/utils/token'
 import { asyncRouterMap, defaultRouterMap } from './router'
 import Cookies from "js-cookie"
@@ -173,6 +173,24 @@ export default new Vuex.Store({
                     if (res.data.code == 1) {
                         commit('SET_AVATAR', res.data.result.image_path)
                     }
+                    resolve(res)
+                }, err => {
+                    reject(err)
+                })
+            })
+        },
+        articleList() {
+            return new Promise((resolve, reject) => {
+                articlelist().then(res => {
+                    resolve(res)
+                }, err => {
+                    reject(err)
+                })
+            })
+        },
+        categoryList() {
+            return new Promise((resolve, reject) => {
+                categorylist().then(res => {
                     resolve(res)
                 }, err => {
                     reject(err)

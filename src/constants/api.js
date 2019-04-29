@@ -22,3 +22,29 @@ export const uploadavatar = data => {
         data
     })
 }
+
+//创建文章
+export const createarticle = data => service({
+    url: '/api/article/create',
+    method: 'post',
+    data
+})
+
+//获取文章列表
+export const articlelist = () => service({
+    url: '/api/article/articlelist',
+    method: 'get'
+})
+
+//创建分类 
+export const createcategory = data => service({
+    url: '/api/category/create',
+    method: 'post',
+    data
+})
+
+//获取分类
+export const categorylist = () => service({
+    url: '/api/category/categorylist',
+    method: 'get'
+})

@@ -1,6 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { login, getuserinfo, uploadavatar, articlelist, categorylist } from '@/constants/api'
+import {
+    login,
+    getuserinfo,
+    uploadavatar,
+    articlelist,
+    categorylist,
+    createcategory,
+    updatecategory
+} from '@/constants/api'
 import { setToken, removeToken } from '@/utils/token'
 import { asyncRouterMap, defaultRouterMap } from './router'
 import Cookies from "js-cookie"
@@ -188,14 +196,32 @@ export default new Vuex.Store({
                 })
             })
         },
-        categoryList() {
+        categoryList({ commit }, id) {
             return new Promise((resolve, reject) => {
-                categorylist().then(res => {
+                categorylist(id).then(res => {
                     resolve(res)
                 }, err => {
                     reject(err)
                 })
             })
-        }
+        },
+        createCategory({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                createcategory(data).then(res => {
+                    resolve(res)
+                }, err => {
+                    reject(err)
+                })
+            })
+        },
+        updatecategory({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                updatecategory(data).then(res => {
+                    resolve(res)
+                }, err => {
+                    reject(err)
+                })
+            })
+        },
     }
 })

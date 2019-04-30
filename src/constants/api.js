@@ -44,7 +44,11 @@ export const createcategory = data => service({
 })
 
 //获取分类
-export const categorylist = () => service({
-    url: '/api/category/categorylist',
-    method: 'get'
+export const categorylist = data => service.get('/api/category/categorylist', { params: data })
+
+//更新分类
+export const updatecategory = data => service({
+    url: '/api/category/update',
+    method: 'post',
+    data
 })

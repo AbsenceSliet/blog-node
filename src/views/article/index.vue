@@ -68,7 +68,7 @@
 export default {
     data() {
         return {
-            tableTitle:[{label:' 分类',prop:'category',sortable:true},{label:'标题',prop:'title',sortable:false},{label:'发布时间',prop:'create_time',sortable:true},{label:'修改时间',prop:'update_time',sortable:true}],
+            tableTitle:[{label:' 分类',prop:'category_name',sortable:true},{label:'标题',prop:'title',sortable:false},{label:'发布时间',prop:'create_time',sortable:true},{label:'修改时间',prop:'update_time',sortable:true}],
             listData:[],
             selectArticles:[],
             currentPage:1,
@@ -84,7 +84,7 @@ export default {
                     this.listData = res.data.result
                 }
             }).catch(err=>{
-
+                console.log(err);
             })
         },
         handleEdit(index, row) {

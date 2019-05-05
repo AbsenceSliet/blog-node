@@ -38,8 +38,8 @@
                 </el-form-item>
                 <el-form-item label="前台是否可视">
                     <el-radio-group v-model="categoryForm.visual">
-                    <el-radio :label="1">是</el-radio>
-                    <el-radio :label="0">否</el-radio>
+                        <el-radio label="1">是</el-radio>
+                        <el-radio label="0">否</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item>
@@ -60,7 +60,7 @@ export default {
             categoryForm:{
                 name:'',
                 level:'',
-                visual:'1'
+                visual:1
             },
             editCategory:false
         }
@@ -93,8 +93,14 @@ export default {
             }
             this.dialogVisible = true
         },
-        deleteCategory(index){
-            this.category.splice(index,1)
+        deleteCategory(index,item){
+            // this.category.splice(index,1)
+            this.$store.dispatch('deleteCategory',{category_id:item.category_id}).then(res=>{
+                if(res.data.code == 1){
+                    this.$message({message:`${res.data.message}`, type: 'success'});
+                    this.category = res.data.result
+                }
+            })
         },
         saveCategory(form){
             this.$refs[form].validate(valid=>{
@@ -102,9 +108,9 @@ export default {
                     let params = this.categoryForm
                     if(this.editCategory){
                         //编辑分类
-                        this.$store.dispatch('updatecategory',params).then(res=>{
+                        this.$store.dispatch('updateCategory',params).then(res=>{
                             if(res.data.code==1){
-                                this.init()
+                                this.category = res.data.result
                                 this.$message({message:`${res.data.message}`, type: 'success'});
                             }
                         })
@@ -112,12 +118,13 @@ export default {
                         //创建分类
                         this.$store.dispatch('createCategory',params).then(res=>{
                             if(res.data.code==1){
-                                this.init()
+                                this.category = res.data.result
                                 this.$message({message:`${res.data.message}`, type: 'success'});
                             }else{
                                 this.$message({message:`${res.data.message}`, type: 'error'});
                             }
                         }).catch(err=>{
+                            console.log(err);
                             // this.$message({message:`操作数据失败`, type: 'error'});
                         })
                     }
@@ -127,8 +134,6 @@ export default {
                         level:'',
                         visual:'1'
                     }
-                }else{
-
                 }
             })
         },

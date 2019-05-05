@@ -52,3 +52,8 @@ export const updatecategory = data => service({
     method: 'post',
     data
 })
+
+//删除分类
+export const deletecategory = data => service.get('/api/category/delete', {
+    params: data
+})

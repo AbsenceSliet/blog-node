@@ -12,10 +12,10 @@
                     <el-form-item label="文章分类">
                         <el-select v-model="category_value" placeholder="请选择">
                             <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in category"
+                            :key="item.category_id"
+                            :label="item.name"
+                            :value="item.category_id">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -53,22 +53,7 @@ export default {
             },
             tags:[],
             category_value:'',
-            options: [{
-            value: '选项1',
-            label: '黄金糕'
-            }, {
-            value: '选项2',
-            label: '双皮奶'
-            }, {
-            value: '选项3',
-            label: '蚵仔煎'
-            }, {
-            value: '选项4',
-            label: '龙须面'
-            }, {
-            value: '选项5',
-            label: '北京烤鸭'
-            }],
+            category: [],
             mavon:''
         }
     },
@@ -77,7 +62,17 @@ export default {
             'device'
         ])
     },
+    mounted() {
+        this.init()
+    },
     methods: {
+        init(){
+            this.$store.dispatch('categoryList').then(res=>{
+                if(res.data.code == 1){
+                    this.category = res.data.result
+                }
+            })
+        },
         inputTag(){
             let inputVal = this.articleContent.tag
             if(inputVal && !this.tags.includes(inputVal)){
@@ -94,8 +89,13 @@ export default {
                 abstract :this.articleContent.abstract,
                 tags:this.tags,
                 content:this.mavon,
-                category_id:'1'
+                category_id:this.category_value
             }
+            this.category.map(item=>{
+                if(item.category_id == createItem.category_id){
+                    createItem.category_name= item.name
+                }
+            })
             createarticle(createItem).then((res)=>{
                 if(res.data.code == 1){
                     this.$message({message:`${res.data.message}`, type: 'success'});
@@ -104,7 +104,7 @@ export default {
                     this.$message({message:`${res.data.message}`, type: 'error'});
                 }
             }).catch(err=>{
-                
+                console.log(err);
             })
         }
     },

@@ -7,7 +7,8 @@ import {
     articlelist,
     categorylist,
     createcategory,
-    updatecategory
+    updatecategory,
+    deletecategory
 } from '@/constants/api'
 import { setToken, removeToken } from '@/utils/token'
 import { asyncRouterMap, defaultRouterMap } from './router'
@@ -214,9 +215,18 @@ export default new Vuex.Store({
                 })
             })
         },
-        updatecategory({ commit }, data) {
+        updateCategory({ commit }, data) {
             return new Promise((resolve, reject) => {
                 updatecategory(data).then(res => {
+                    resolve(res)
+                }, err => {
+                    reject(err)
+                })
+            })
+        },
+        deleteCategory({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                deletecategory(data).then(res => {
                     resolve(res)
                 }, err => {
                     reject(err)

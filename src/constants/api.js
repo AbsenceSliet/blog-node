@@ -25,35 +25,50 @@ export const uploadavatar = data => {
 
 //创建文章
 export const createarticle = data => service({
-    url: '/api/article/create',
+    url: '/api/auth/article/create',
     method: 'post',
     data
 })
 
 //获取文章列表
 export const articlelist = () => service({
-    url: '/api/article/articlelist',
+    url: '/api/auth/article/articlelist',
     method: 'get'
+})
+
+//获取文章详情
+export const articledetail = id => service({
+    url: `/api/auth/article/getarticledeatil/${id}`,
+    method: 'get'
+})
+
+//更新文章内容
+export const updatearticle = data => service({
+    url: '/api/auth/article/update',
+    method: 'post',
+    data
 })
 
 //创建分类 
 export const createcategory = data => service({
-    url: '/api/category/create',
+    url: '/api/auth/category/create',
     method: 'post',
     data
 })
 
 //获取分类
-export const categorylist = data => service.get('/api/category/categorylist', { params: data })
+export const categorylist = data => service.get('/api/auth/category/categorylist', {
+    params: data
+})
 
 //更新分类
 export const updatecategory = data => service({
-    url: '/api/category/update',
+    url: '/api/auth/category/update',
     method: 'post',
     data
 })
 
 //删除分类
-export const deletecategory = data => service.get('/api/category/delete', {
+export const deletecategory = data => service.get('/api/auth/category/delete', {
     params: data
 })

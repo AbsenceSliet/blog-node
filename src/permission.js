@@ -13,22 +13,32 @@ const whiteList = ['/login']
 router.beforeEach((to, from, next) => {
     if (checkToken()) {
         if (to.path == '/login') {
-            next({ path: '/' })
+            // next({ path: '/' })
+            next()
         } else {
             if (store.state.roles.length == 0) {
                 store.dispatch('GetUserInfo').then(res => {
-                    let roles = res.data.result.roles
+                    console.log(res);
+                    if (res.data.code == 1) {
+                        let roles = res.data.result.roles
 
-                    // 动态生成路由表
-                    store.dispatch('GenerateRoutes', { roles }).then(() => {
-                        router.addRoutes(store.state.addRouters)
-                        next({...to, replace: true })
-                    }).catch(error => {
-                        store.dispatch('FedLogOut').then(() => {
-                            Message.error(error)
-                            next({ path: '/' })
+                        // 动态生成路由表
+                        store.dispatch('GenerateRoutes', { roles }).then(() => {
+                            router.addRoutes(store.state.addRouters)
+                            next({...to, replace: true })
+                        }).catch(error => {
+                            store.dispatch('FedLogOut').then(() => {
+                                Message.error(error)
+                                next({ path: '/' })
+                            })
                         })
-                    })
+                    } else {
+                        Message.error(res.data.err)
+                        next({ path: '/login' })
+                    }
+
+
+
                 })
             } else {
                 if (hasPermission(store.state.roles, to.meta.roles)) {

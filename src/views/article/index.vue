@@ -88,7 +88,7 @@ export default {
             })
         },
         handleEdit(index, row) {
-            console.log(index, row);
+            this.$router.push({ path: '/article/create', query: { article_id: row.article_id }})
         },
         handleDelete(index, row) {
             console.log(index, row);

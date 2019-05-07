@@ -8,9 +8,7 @@ import {
     categorylist,
     createcategory,
     updatecategory,
-    deletecategory,
-    updatearticle,
-    articledetail
+    deletecategory
 } from '@/constants/api'
 import { setToken, removeToken } from '@/utils/token'
 import { asyncRouterMap, defaultRouterMap } from './router'

@@ -65,6 +65,7 @@
     </div>
 </template>
 <script>
+import {  deletearticle } from '@/constants/api'
 export default {
     data() {
         return {
@@ -91,7 +92,13 @@ export default {
             this.$router.push({ path: '/article/create', query: { article_id: row.article_id }})
         },
         handleDelete(index, row) {
-            console.log(index, row);
+            deletearticle(row.article_id).then(res=>{
+                if(res.data.code == 1){
+                    this.$message({message:`${res.data.message}`, type: 'success'});
+                    let index  = this.listData.findIndex(item=>item.article_id == res.data.result.article_id)
+                    this.listData.splice(index,1)
+                }
+            })
         },
         selectionChange(val){
             this.selectArticles =val
@@ -110,7 +117,9 @@ export default {
         }
     },
     mounted(){
-        this.init_data()
+        this.$nextTick(()=>{
+            this.init_data()
+        })
     }
 }
 </script>

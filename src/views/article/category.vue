@@ -95,10 +95,11 @@ export default {
         },
         deleteCategory(index,item){
             // this.category.splice(index,1)
-            this.$store.dispatch('deleteCategory',{category_id:item.category_id}).then(res=>{
+            this.$store.dispatch('deleteCategory',item.category_id).then(res=>{
                 if(res.data.code == 1){
                     this.$message({message:`${res.data.message}`, type: 'success'});
-                    this.category = res.data.result
+                    let index  = this.category.findIndex(item=>item.category_id == res.data.result.category_id)
+                    this.category.splice(index,1)
                 }
             })
         },
@@ -110,7 +111,8 @@ export default {
                         //编辑分类
                         this.$store.dispatch('updateCategory',params).then(res=>{
                             if(res.data.code==1){
-                                this.category = res.data.result
+                                let index  = this.category.findIndex(item=>item.category_id == res.data.result.category_id)
+                                this.category.splice(index,1,res.data.result)
                                 this.$message({message:`${res.data.message}`, type: 'success'});
                             }
                         })
@@ -118,7 +120,7 @@ export default {
                         //创建分类
                         this.$store.dispatch('createCategory',params).then(res=>{
                             if(res.data.code==1){
-                                this.category = res.data.result
+                                this.category.push(res.data.result)
                                 this.$message({message:`${res.data.message}`, type: 'success'});
                             }else{
                                 this.$message({message:`${res.data.message}`, type: 'error'});

@@ -49,6 +49,12 @@ export const updatearticle = data => service({
     data
 })
 
+//删除文章
+export const deletearticle = id => service({
+    url: `/api/auth/article/delete/${id}`,
+    method: 'get'
+})
+
 //创建分类 
 export const createcategory = data => service({
     url: '/api/auth/category/create',
@@ -69,6 +75,4 @@ export const updatecategory = data => service({
 })
 
 //删除分类
-export const deletecategory = data => service.get('/api/auth/category/delete', {
-    params: data
-})
+export const deletecategory = id => service.get(`/api/auth/category/delete/${id}`)

@@ -46,10 +46,10 @@
                     @current-change="handleCurrentChange"
                     :current-page="currentPage"
                     :page-sizes="pageSizes"
-                    :page-size="pageSize"
+                    :page-size="limit"
                     background
                     layout="total, sizes, prev, pager, next, jumper"
-                    :total="400"
+                    :total="count"
                     >
                     </el-pagination>
                 </el-col>
@@ -65,7 +65,7 @@
     </div>
 </template>
 <script>
-import {  deletearticle } from '@/constants/api'
+import {  deletearticle,articlecount } from '@/constants/api'
 export default {
     data() {
         return {
@@ -73,14 +73,25 @@ export default {
             listData:[],
             selectArticles:[],
             currentPage:1,
-            pageSize:100,
-            pageSizes:[100, 200, 300, 400],
-            total:'400'
+            pageSizes:[1, 2, 3, 4],
+            offset:0,
+            limit:2,
+            count:5
         }
     },
     methods: {
         init_data(){
-            this.$store.dispatch('articleList').then(res=>{
+            articlecount().then(res=>{
+                if(res.data.code ==1){
+                    this.count = res.data.result
+                    this.getArticles()
+                }
+            }).catch(err=>{
+                  this.$message({message:`${err}`, type: 'error'})  
+            })
+        },
+        getArticles(){
+            this.$store.dispatch('articleList',{offset: this.offset, limit: this.limit}).then(res=>{
                 if(res.data.code == 1){
                     this.listData = res.data.result
                 }
@@ -106,11 +117,14 @@ export default {
         deleteAll(){
 
         },
-        handleSizeChange(){
-
+        handleSizeChange(val){
+            this.limit = val
+            this.getArticles()
         },
-        handleCurrentChange(){
-            
+        handleCurrentChange(val){
+            this.currentPage = val;
+            this.offset = (val - 1)*this.limit;
+            this.getArticles()
         },
         createArticle(){
             this.$router.push({path:'/article/create'})

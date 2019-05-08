@@ -16,13 +16,12 @@ router.beforeEach((to, from, next) => {
             // next({ path: '/' })
             next()
         } else {
+            console.log(store.state.roles, to);
             if (store.state.roles.length == 0) {
                 store.dispatch('GetUserInfo').then(res => {
-                    console.log(res);
                     if (res.data.code == 1) {
                         let roles = res.data.result.roles
-
-                        // 动态生成路由表
+                            // 动态生成路由表
                         store.dispatch('GenerateRoutes', { roles }).then(() => {
                             router.addRoutes(store.state.addRouters)
                             next({...to, replace: true })
@@ -36,11 +35,9 @@ router.beforeEach((to, from, next) => {
                         Message.error(res.data.err)
                         next({ path: '/login' })
                     }
-
-
-
                 })
             } else {
+                // next()
                 if (hasPermission(store.state.roles, to.meta.roles)) {
                     next()
                 } else {

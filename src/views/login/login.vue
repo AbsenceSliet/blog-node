@@ -58,10 +58,7 @@ export default {
                     this.$store.dispatch('Login',userinfo).then(res => {
                         console.log(this.redirect,'redirect')
                         if(res.data.code == 1) {
-                            this.$message({message:'登录成功', type: 'success'});
-                            this.$router.push({ path: this.redirect || '/' })
-                        }else if(res.data.code == 2){
-                            this.$message({message:'注册会员成功', type: 'success'});
+                            this.$message({message:`${res.data.message}`, type: 'success'});
                             this.$router.push({ path: this.redirect || '/' })
                         }else{
                             this.$message({message:`${res.data.message}`, type: 'error'});

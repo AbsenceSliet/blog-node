@@ -31,8 +31,15 @@ export const createarticle = data => service({
 })
 
 //获取文章列表
-export const articlelist = () => service({
+export const articlelist = data => service({
     url: '/api/auth/article/articlelist',
+    method: 'get',
+    params: data
+})
+
+//获取文章数量
+export const articlecount = () => service({
+    url: '/api/auth/article/articlecount',
     method: 'get'
 })
 

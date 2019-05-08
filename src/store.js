@@ -102,6 +102,7 @@ export default new Vuex.Store({
         SET_ROUTERS(state, routers) {
             state.addRouters = routers;
             state.routers = defaultRouterMap.concat(routers)
+            console.log(state.routers);
         }
     },
     actions: {
@@ -188,9 +189,9 @@ export default new Vuex.Store({
                 })
             })
         },
-        articleList() {
+        articleList({ commit }, data) {
             return new Promise((resolve, reject) => {
-                articlelist().then(res => {
+                articlelist(data).then(res => {
                     resolve(res)
                 }, err => {
                     reject(err)

@@ -14,7 +14,7 @@ import fullscreen from 'vue-fullscreen'
 import './permission' // permission control
 import '@/icons'
 import i18n from './i18n'
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(mavonEditor)
 Vue.use(fullscreen)

@@ -29,7 +29,7 @@ import AppLink from "./link"
 import { isExternal } from '@/utils/validate'
 import  generatetitle  from '@/utils/i18n'
 export default {
-    name:'SidebarItem',
+    name:'sidebarItem',
     components:{
         Item,
         AppLink

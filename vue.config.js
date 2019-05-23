@@ -32,7 +32,7 @@ module.exports = {
                 symbolId: 'icon-[name]'
             })
         config.resolve.alias
-            .set('@', resolve('src'))
+            .set('src', resolve('src'))
             .set('@assets', resolve('src/assets'))
     },
     // configureWebpack: {

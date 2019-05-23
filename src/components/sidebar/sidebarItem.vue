@@ -35,7 +35,7 @@ export default {
         AppLink
     },
     data(){
-        onlyOneChild :null
+        onlyOneChild :{}
         return {
             
         }

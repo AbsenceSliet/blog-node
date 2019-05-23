@@ -126,8 +126,8 @@ export default {
                                 this.$message({message:`${res.data.message}`, type: 'error'});
                             }
                         }).catch(err=>{
-                            console.log(err);
-                            // this.$message({message:`操作数据失败`, type: 'error'});
+                            // console.log(err);
+                             this.$message({message:err.message, type: 'error'});
                         })
                     }
                     this.dialogVisible =false

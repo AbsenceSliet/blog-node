@@ -1,4 +1,5 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -44,7 +45,22 @@ module.exports = {
     //         }
     //     }
     // },
-
+    configureWebpack: {
+        optimization: {
+            minimizer: [
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        compress: {
+                            warnings: false,
+                            drop_console: true, //console
+                            drop_debugger: false,
+                            pure_funcs: ['console.log'] //移除console
+                        }
+                    }
+                })
+            ]
+        }
+    },
     devServer: {
         port: 8089,
         proxy: {

@@ -102,7 +102,7 @@ export default {
                     this.$message.error('上传图片失败！');
                 }
             },err=>{
-                this.$message.error('上传图片失败！');
+                this.$message.error('上传图片失败！',err.message);
             })
         }
     }

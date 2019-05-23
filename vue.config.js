@@ -1,5 +1,4 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -10,7 +9,7 @@ const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088'
 module.exports = {
     publicPath: './',
     // lintOnSave: process.env.NODE_ENV !== 'production',
-    lintOnSave: true,
+    lintOnSave: false,
     // 生产环境是否生成 sourceMap 文件
     productionSourceMap: false,
     // 开启 CSS source maps?
@@ -45,22 +44,6 @@ module.exports = {
     //         }
     //     }
     // },
-    configureWebpack: {
-        optimization: {
-            minimizer: [
-                new UglifyJsPlugin({
-                    uglifyOptions: {
-                        compress: {
-                            warnings: false,
-                            drop_console: true, //console
-                            drop_debugger: false,
-                            pure_funcs: ['console.log'] //移除console
-                        }
-                    }
-                })
-            ]
-        }
-    },
     devServer: {
         port: 8089,
         proxy: {

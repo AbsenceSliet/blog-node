@@ -16,7 +16,7 @@
 </template>
 <script>
 import variables from '@/style/variables.scss'
-import SidebarItem from  "@/components/sidebar/sidebarItem.vue"
+import SidebarItem from  "@/components/Sidebar/sidebarItem.vue"
 import {mapGetters} from  'vuex'
 export default {
     name:'sidebar',

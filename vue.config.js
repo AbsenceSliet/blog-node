@@ -40,7 +40,7 @@ module.exports = {
         extract: process.env.NODE_ENV === 'production' ? true : false,
         sourceMap: false
     },
-    chainWebpack: (config) => {
+    chainWebpack: config => {
         config.module
             .rule('svg')
             .exclude.add(resolve('src/icons'))

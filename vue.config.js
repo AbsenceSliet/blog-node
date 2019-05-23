@@ -3,11 +3,11 @@ const path = require('path');
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
-
+console.log(resolve('src'), 'jjjj')
 const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088' : 'http://api.garener.com:8088/'
 
 module.exports = {
-    lintOnSave: process.env.NODE_ENV !== 'production',
+    // lintOnSave: process.env.NODE_ENV !== 'production',
     // 生产环境是否生成 sourceMap 文件
     productionSourceMap: false,
     // 开启 CSS source maps?
@@ -31,7 +31,7 @@ module.exports = {
                 symbolId: 'icon-[name]'
             })
         config.resolve.alias
-            .set('src', resolve('src'))
+            .set('@', resolve('src'))
             .set('@assets', resolve('src/assets'))
     },
     // configureWebpack: {

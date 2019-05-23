@@ -7,6 +7,7 @@ console.log(resolve('src'), 'jjjj')
 const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088' : 'http://api.garener.com:8088/'
 
 module.exports = {
+    publicPath: './',
     // lintOnSave: process.env.NODE_ENV !== 'production',
     lintOnSave: true,
     // 生产环境是否生成 sourceMap 文件

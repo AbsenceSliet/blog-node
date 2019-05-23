@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -30,9 +30,17 @@ module.exports = {
             .options({
                 symbolId: 'icon-[name]'
             })
-        config.resolve.alias
-            .set('@', resolve('src'))
-            .set('@assets', resolve('src/assets'))
+            // config.resolve.alias
+            //     .set('@', resolve('src'))
+            //     .set('@assets', resolve('src/assets'))
+    },
+    configureWebpack: {
+        resolve: {
+            alias: {
+                'src': '@',
+                'src/assets': '@assets'
+            }
+        }
     },
 
     devServer: {

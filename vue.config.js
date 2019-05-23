@@ -30,18 +30,18 @@ module.exports = {
             .options({
                 symbolId: 'icon-[name]'
             })
-            // config.resolve.alias
-            //     .set('@', resolve('src'))
-            //     .set('@assets', resolve('src/assets'))
+        config.resolve.alias
+            .set('src', resolve('src'))
+            .set('@assets', resolve('src/assets'))
     },
-    configureWebpack: {
-        resolve: {
-            alias: {
-                'src': '@',
-                'src/assets': '@assets'
-            }
-        }
-    },
+    // configureWebpack: {
+    //     resolve: {
+    //         alias: {
+    //             'src': '@',
+    //             'src/assets': '@assets'
+    //         }
+    //     }
+    // },
 
     devServer: {
         port: 8089,

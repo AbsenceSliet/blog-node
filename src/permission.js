@@ -13,8 +13,8 @@ const whiteList = ['/login']
 router.beforeEach((to, from, next) => {
     if (checkToken()) {
         if (to.path == '/login') {
-            // next({ path: '/' })
-            next()
+            next({ path: '/' })
+                // next()
         } else {
             console.log(store.state.roles, to);
             if (store.state.roles.length == 0) {
@@ -47,6 +47,7 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {
+            console.log(12312);
             next()
         } else {
             next(`/login?redirect=${to.path}`)

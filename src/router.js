@@ -9,6 +9,9 @@ const layout = r => require.ensure([], () => {
 const unfind = r => require.ensure([], () => {
     r(require('@/views/errorpage/401'), 'unfind')
 })
+const nofind = r => require.ensure([], () => {
+    r(require('@/views/errorpage/404'), 'nofind')
+})
 const pageindex = r => require.ensure([], () => {
     r(require('@/views/permission/page'), 'pageindex')
 })
@@ -64,6 +67,10 @@ export const defaultRouterMap = [{
 }, {
     path: '/401',
     component: unfind,
+    hidden: true
+}, {
+    path: '/404',
+    component: nofind,
     hidden: true
 }]
 
@@ -188,6 +195,10 @@ export const asyncRouterMap = [{
             icon: 'setting'
         }
     }]
+}, {
+    path: '*',
+    redirect: '/404',
+    hidden: true
 }]
 export default new Router({
     mode: 'hash',

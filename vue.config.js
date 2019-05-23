@@ -4,7 +4,7 @@ function resolve(dir) {
     return path.join(__dirname, dir)
 }
 
-const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088' : 'http://47.102.154.71:8088'
+const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088' : 'http://api.garener.com:8088/'
 
 module.exports = {
     lintOnSave: process.env.NODE_ENV !== 'production',
@@ -36,6 +36,7 @@ module.exports = {
     },
 
     devServer: {
+        port: 8089,
         proxy: {
             '/': {
                 target: BASE_URL, //对应自己的接口

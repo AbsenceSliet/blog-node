@@ -19,7 +19,7 @@ const cdn = {
             'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
         ],
         js: [
-            'https://unpkg.com/element-ui/lib/index.js',
+            'https://cdn.bootcss.com/element-ui/2.8.2/index.js',
             'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
             'https://cdn.bootcss.com/vuex/3.1.0/vuex.min.js',
             'https://cdn.bootcss.com/vue-router/3.0.6/vue-router.min.js',

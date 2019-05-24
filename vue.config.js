@@ -1,9 +1,44 @@
 const path = require('path');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
 const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088' : 'http://api.garener.com:8088/'
+
+console.log(process.env.NODE_ENV, 'kkkkk');
+// 是否使用gzip
+const productionGzip = true
+    // 需要gzip压缩的文件后缀
+const productionGzipExtensions = ['js', 'css']
+
+
+const cdn = {
+    build: {
+        css: [
+            'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
+        ],
+        js: [
+            'https://unpkg.com/element-ui/lib/index.js',
+            'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
+            'https://cdn.bootcss.com/vuex/3.1.0/vuex.min.js',
+            'https://cdn.bootcss.com/vue-router/3.0.6/vue-router.min.js',
+            'https://cdn.bootcss.com/vue-i18n/8.11.2/vue-i18n.min.js',
+            'https://cdn.bootcss.com/axios/0.18.0/axios.min.js',
+            'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js'
+        ]
+    }
+}
+
+// cdn预加载使用
+const externals = {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'vuex': 'Vuex',
+    'axios': 'axios',
+    'element-ui': 'ELEMENT',
+    'js-cookie': 'Cookies'
+}
 
 module.exports = {
     publicPath: '/',
@@ -40,13 +75,24 @@ module.exports = {
         sourceMap: false
     },
     chainWebpack: config => {
+        /**
+         * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+         */
+        config.plugin('html')
+            .tap(args => {
+                if (process.env.NODE_ENV === 'production') {
+                    args[0].cdn = cdn.build
+                }
+                if (process.env.NODE_ENV === 'development') {
+                    // args[0].cdn = cdn.dev
+                }
+                return args;
+            })
+        const svgRule = config.module.rule('svg') // 找到svg-loader
+        svgRule.uses.clear() // 清除已有的loader, 如果不这样做会添加在此loader之后
+        svgRule.exclude.add(/node_modules/) // 正则匹配排除node_modules目录
         config.module
             .rule('svg')
-            .exclude.add(resolve('src/icons'))
-            .end()
-
-        config.module
-            .rule('icons')
             .test(/\.svg$/)
             .include.add(resolve('src/icons'))
             .end()
@@ -55,24 +101,33 @@ module.exports = {
             .options({
                 symbolId: 'icon-[name]'
             })
+        const imagesRule = config.module.rule('images')
+        imagesRule.exclude.add(resolve('src/icons'))
+        config.module
+            .rule('images')
+            .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
         config.resolve.alias
             .set('@', resolve('src'))
             .set('@assets', resolve('src/assets'))
     },
     configureWebpack: config => {
-        config.externals = {
-            vue: "Vue",
+        if (process.env.NODE_ENV === 'production') {
+            //生产环境修改配置
+            //1.生产环境npm包转CDN
+            config.externals = externals
+
+            // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
+            productionGzip && config.plugins.push(
+                new CompressionWebpackPlugin({
+                    test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                    threshold: 8192,
+                    minRatio: 0.8
+                })
+            )
+        } else {
+            //开发环境修改配置
         }
     },
-
-    // configureWebpack: {
-    //     resolve: {
-    //         alias: {
-    //             'src': '@',
-    //             'src/assets': '@assets'
-    //         }
-    //     }
-    // },
     devServer: {
         port: 8089,
         proxy: {

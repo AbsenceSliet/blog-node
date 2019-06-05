@@ -3,7 +3,7 @@ module.exports = {
 
         {
             name: 'blogend',
-            script: '',
+            script: 'php-fpm',
             env: {
                 COMMON_VARIABLE: 'true'
             },

@@ -74,7 +74,7 @@ export const defaultRouterMap = [{
     hidden: true
 }]
 
-export const asyncRouterMap = [{
+export const asyncRouterMap1 = [{
     path: '/permisson',
     component: layout,
     redrect: '/permisson/index',
@@ -167,6 +167,71 @@ export const asyncRouterMap = [{
         meta: {
             title: 'mavonEditor',
             icon: 'mavon'
+        }
+    }]
+}, {
+    path: '/i18n',
+    component: layout,
+    redirect: 'noredirect',
+    children: [{
+        path: 'index',
+        component: i18n,
+        name: 'I18n',
+        meta: {
+            title: 'i18n',
+            icon: 'international'
+        }
+    }]
+}, {
+    path: '/setting',
+    component: layout,
+    redirect: 'noredirect',
+    children: [{
+        path: 'index',
+        component: setting,
+        name: 'Setting',
+        meta: {
+            title: 'setting',
+            icon: 'setting'
+        }
+    }]
+}, {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+}]
+export const asyncRouterMap = [{
+    path: '/article',
+    component: layout,
+    redrect: '/article/index',
+    meta: {
+        title: 'article',
+        icon: 'article',
+        roles: ['admin']
+    },
+    children: [{
+        path: 'index',
+        component: article,
+        name: 'articleList',
+        meta: {
+            title: 'articleList',
+            roles: ['admin']
+        }
+    }, {
+        path: 'create',
+        component: createArticle,
+        name: 'createArticle',
+        meta: {
+            title: 'createArticle',
+            roles: ['admin']
+        }
+    }, {
+        path: 'category',
+        component: category,
+        name: 'category',
+        meta: {
+            title: 'category',
+            roles: ['admin']
         }
     }]
 }, {

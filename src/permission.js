@@ -16,7 +16,6 @@ router.beforeEach((to, from, next) => {
             next({ path: '/' })
                 // next()
         } else {
-            console.log(store.state.roles, to);
             if (store.state.roles.length == 0) {
                 store.dispatch('GetUserInfo').then(res => {
                     if (res.data.code == 1) {
@@ -47,7 +46,6 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {
-            console.log(12312);
             next()
         } else {
             next(`/login?redirect=${to.path}`)

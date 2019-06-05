@@ -102,7 +102,6 @@ export default new Vuex.Store({
         SET_ROUTERS(state, routers) {
             state.addRouters = routers;
             state.routers = defaultRouterMap.concat(routers)
-            console.log(state.routers);
         }
     },
     actions: {

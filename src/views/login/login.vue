@@ -56,7 +56,6 @@ export default {
                 if(valid){
                     let userinfo = {username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)}
                     this.$store.dispatch('Login',userinfo).then(res => {
-                        console.log(this.redirect,'redirect')
                         if(res.data.code == 1) {
                             this.$message({message:`${res.data.message}`, type: 'success'});
                             this.$router.push({ path: this.redirect || '/' })
@@ -67,7 +66,7 @@ export default {
                         this.$message({message:`${error.message}`, type: 'error'});
                     })
                 }
-            })  
+            })
         }
     }
 }

@@ -3,7 +3,7 @@ module.exports = {
 
         {
             name: 'blogend',
-            script: 'none',
+            script: 'app.js',
             env: {
                 COMMON_VARIABLE: 'true'
             },

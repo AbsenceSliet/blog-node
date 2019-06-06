@@ -25,8 +25,9 @@ module.exports = {
             ref: 'origin/master',
             repo: 'git@github.com:AbsenceSliet/blog-node.git',
             path: '/www/blog_node/production',
+            //&& pm2 reload ecosystem.config.js --env production
             "pre-setup" : "echo 'commands or local script path to be run on the host before the setup process starts'",
-            'post-deploy': 'rm -rf node_modules &&  yarn && yarn build:pro  && pm2 reload ecosystem.config.js --env production'
+            'post-deploy': 'rm -rf node_modules &&  yarn && yarn build:pro  '
         },
     }
 };

@@ -1,4 +1,4 @@
-/*const fs = require('fs');
+const fs = require('fs');
 const express = require('express')
 const chalk = require('chalk')
 const path = require('path')
@@ -13,4 +13,4 @@ app.get('*', function(req, res) {
 })
 app.listen(8082, res => {
     console.log(chalk.yellow('Start Service On 8082'));
-});*/
+});

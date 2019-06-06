@@ -3,7 +3,7 @@ module.exports = {
 
         {
             name: 'blogend',
-            // script: 'npm run  ',
+            script: './app.js',
             instances: 'max',
             autorestart: true,
             watch: false,

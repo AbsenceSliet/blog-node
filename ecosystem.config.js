@@ -3,7 +3,7 @@ module.exports = {
 
         {
             name: 'blogend',
-            script: 'app.js',
+            script: ' yarn -- run build ',
             env: {
                 COMMON_VARIABLE: 'true'
             },
@@ -26,7 +26,7 @@ module.exports = {
             repo: 'git@github.com:AbsenceSliet/blog-node.git',
             path: '/www/blog_node/production',
             "pre-setup" : "echo 'commands or local script path to be run on the host before the setup process starts'",
-            'post-deploy': '  yarn   && yarn run build   && pm2 reload ecosystem.config.js --env production'
+            'post-deploy': '  yarn     && pm2 reload ecosystem.config.js --env production'
         },
     }
 };

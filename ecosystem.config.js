@@ -3,7 +3,7 @@ module.exports = {
 
         {
             name: 'blogend',
-            script: ' npm -- run build ',
+            script: ' yarn build:pro ',
             env: {
                 COMMON_VARIABLE: 'true'
             },

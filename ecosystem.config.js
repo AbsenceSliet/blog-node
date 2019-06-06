@@ -4,7 +4,7 @@ module.exports = {
         {
             name: 'blogend',
             // script: 'npm run  ',
-            instances: max,
+            instances: 'max',
             autorestart: true,
             watch: false,
             max_memory_restart: '1G',

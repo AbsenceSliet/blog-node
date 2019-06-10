@@ -46,12 +46,13 @@ export default new Vuex.Store({
         roles: [],
         routers: [],
         addRouters: [],
-        userinfo: '',
         avatar: '',
         sidebar: {
             opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
             withoutAnimation: false
         },
+        user_c_time:'',
+        user_name:'',
         device: 'desktop',
         language: Cookies.get('language') || 'en',
     },
@@ -59,8 +60,10 @@ export default new Vuex.Store({
         permission_routers: state => state.routers,
         sidebar: state => state.sidebar,
         device: state => state.device,
-        userinfo: state => state.userinfo,
-        avatar: state => state.avatar
+        avatar: state => state.avatar,
+        user_c_time: state => state.user_c_time,
+        user_name: state => state.user_name,
+        status: state => state.status,
     },
     mutations: {
         TOOGLE_SIDEBAR(state) {
@@ -86,11 +89,15 @@ export default new Vuex.Store({
         SET_TOKEN(state, token) {
             state.token = token
         },
-        SET_USERINFO(state, info) {
-            state.userinfo = info
+        SET_USERNAME(state, info) {
+            state.user_name = info
         },
+
         SET_AVATAR(state, avatar) {
             state.avatar = avatar
+        },
+        SET_USER_C_TIME(state, ctime) {
+            state.user_c_time = ctime
         },
         SET_LANGUAGE(state, language) {
             state.language = language
@@ -140,8 +147,9 @@ export default new Vuex.Store({
                         const data = response.data.result
                         commit('SET_STATUS', data.userstatus)
                         commit('SET_ROLES', data.roles)
-                        commit('SET_USERINFO', data)
-                        commit('SET_AVATAR', data.avatar)
+                        commit('SET_USER_C_TIME', data.create_time)
+                        commit('SET_AVATAR', data.avatar),
+                        commit('SET_USERNAME', data.username)
                     }
                     resolve(response)
                 }).catch(error => {

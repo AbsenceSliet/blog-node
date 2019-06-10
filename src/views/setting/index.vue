@@ -6,10 +6,10 @@
             </div>
             <el-form ref="form" label-position="center"   label-width="120px" size="mini">
                 <el-form-item :label="$t('setting.name')">
-                        <span>{{userinfo.username}}</span>
+                        <span>{{user_name}}</span>
                 </el-form-item>
                 <el-form-item :label="$t('setting.createTime')">
-                        <span>{{userinfo.create_time}}</span>
+                        <span>{{user_c_time}}</span>
                 </el-form-item>
                 <el-form-item :label="$t('setting.permission')">
                         <span>{{userrole}}</span>
@@ -22,7 +22,7 @@
                             <input type="file" class="upload-input" @change="uploadimage" >
                         </div>
                     </div>
-                </el-form-item>     
+                </el-form-item>
             </el-form>
 
         </el-card>
@@ -85,10 +85,12 @@ export default {
     computed: {
         ...mapGetters([
             'avatar',
-            'userinfo'
+            'user_c_time',
+            'status',
+            'user_name'
         ]),
         userrole(){
-            return this.userinfo.userstatus == 2 ? '超级管理员' : '普通管理员'
+            return this.status == 2 ? '超级管理员' : '普通管理员'
         }
     },
     methods:{

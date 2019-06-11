@@ -15,6 +15,7 @@ service.interceptors.request.use(
     config => {
         let { headers } = config;
         let token = localStorage.getItem(TOKEN)
+        console.log(token,'token');
         if (token) {
             Object.assign(headers, {
                 Authorization: `Bearer ${token}`

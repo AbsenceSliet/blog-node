@@ -12,7 +12,7 @@ export const getuserinfo = data => service({
     data
 })
 export const uploadavatar = data => {
-    let url = `/api/user/auth/upload/avatar/${store.state.userinfo.admin_id}`
+    let url = `/api/user/auth/upload/avatar/${store.state.admin_id}`
     return service({
         url: url,
         method: 'post',

@@ -267,7 +267,7 @@ export const asyncRouterMap = [{
 }]
 export default new Router({
     // history hash
-    mode: 'history',
+    mode: 'hash',
     base: process.env.BASE_URL,
     routes: defaultRouterMap
 })

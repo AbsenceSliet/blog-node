@@ -53,6 +53,7 @@ export default new Vuex.Store({
         },
         user_c_time:'',
         user_name:'',
+        admin_id:'',
         device: 'desktop',
         language: Cookies.get('language') || 'en',
     },
@@ -95,6 +96,9 @@ export default new Vuex.Store({
 
         SET_AVATAR(state, avatar) {
             state.avatar = avatar
+        },
+        SET_ADMIN_ID(state, id) {
+            state.admin_id =id
         },
         SET_USER_C_TIME(state, ctime) {
             state.user_c_time = ctime
@@ -150,6 +154,7 @@ export default new Vuex.Store({
                         commit('SET_USER_C_TIME', data.create_time)
                         commit('SET_AVATAR', data.avatar),
                         commit('SET_USERNAME', data.username)
+                        commit('SET_ADMIN_ID', data.admin_id)
                     }
                     resolve(response)
                 }).catch(error => {

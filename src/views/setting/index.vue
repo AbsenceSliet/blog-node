@@ -98,6 +98,7 @@ export default {
             let formData = new FormData();
             formData.append('file', e.target.files[0]);
             this.$store.dispatch('uploadAvatar',formData).then(res=>{
+                console.log('pppppp');
                 if(res.data.code == 1){
                     this.$message({message:'上传图片成功！', type: 'success'});
                 }else{

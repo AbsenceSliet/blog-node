@@ -7,12 +7,16 @@
                         <el-input v-model ="loginForm.username" :placeholder="$t('login.username')"></el-input>
                     </el-form-item>
                     <el-form-item prop="password">
-                        <el-input type="password" v-model ="loginForm.passward" :placeholder="$t('login.password')"></el-input>
+                        <el-input type="password" v-model ="loginForm.passward" :placeholder="$t('login.password')" @keyup.enter.native="login('loginForm')"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="login('loginForm')" class="login_btn">{{$t('login.login')}}</el-button>
+                        <el-button type="primary" @click.stop="login('loginForm')" class="login_btn">{{$t('login.login')}}</el-button>
                     </el-form-item>
                 </el-form>
+                <div class="tip">
+                    <span>用户名:admin </span>
+                    <span>密码:admin123</span>
+                </div>
             </section>
         </transition>
     </div>
@@ -52,6 +56,7 @@ export default {
     },
     methods:{
         async login(formName){
+            console.log(123123);
             this.$refs[formName].validate(async (valid) =>{
                 if(valid){
                     let userinfo = {username : this.loginForm.username, password: Base64.encode(this.loginForm.passward)}
@@ -95,5 +100,13 @@ export default {
     .login-fade-enter, .login-fade-leave{
         transform: translate3d(0, -50px, 0);
         opacity: 0;
+    }
+    .tip{
+        display: flex;
+        justify-content:space-around;
+        span{
+            color: red;
+            font-size: 14px;
+        }
     }
 </style>

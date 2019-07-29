@@ -1,11 +1,12 @@
 const path = require('path');
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');  //webpack打包工具 需要安装 npm install uglifyjs-webpack-plugin
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
 const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:8088' : 'http://api.garener.com:8088/'
-
+//生产环境
+const isProduction = process.env.NODE_ENV === 'production';
 console.log(process.env.NODE_ENV, 'kkkkk');
 // 是否使用gzip
 const productionGzip = true
@@ -109,6 +110,17 @@ module.exports = {
         config.resolve.alias
             .set('@', resolve('src'))
             .set('@assets', resolve('src/assets'))
+        if (isProduction) {
+            // 删除预加载
+            config.plugins.delete('preload');
+            config.plugins.delete('prefetch');
+            // 压缩代码
+            config.optimization.minimize(true);
+            // 分割代码
+            config.optimization.splitChunks({
+                chunks: 'all'
+            })
+        }
     },
     configureWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
@@ -124,11 +136,28 @@ module.exports = {
                     minRatio: 0.8
                 })
             )
+            config.plugins.push(
+                //生产环境自动删除console
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        compress: {
+                          // warnings: false,
+                          drop_debugger: true,
+                          drop_console: true,
+                        },
+                    },
+                    //是否生成sourceMap
+                    sourceMap: false,
+                    //使用多进程并行运行来提高构建速度
+                    parallel: true,
+                })
+            );
         } else {
             //开发环境修改配置
         }
     },
     devServer: {
+        compress: false, // 开启压缩
         port: 8089,
         proxy: {
             '/': {
@@ -141,7 +170,10 @@ module.exports = {
             }
         }
     },
-
+    // 生产环境是否生成 sourceMap 文件
+    productionSourceMap: false,
+    // 启用并行化。默认并发运行数：os.cpus().length - 1。并行化可以显著加速构建
+    parallel: require('os').cpus().length > 1,
     pluginOptions: {
         i18n: {
             locale: 'en',

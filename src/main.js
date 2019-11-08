@@ -14,6 +14,12 @@ import fullscreen from 'vue-fullscreen'
 import './permission' // permission control
 import '@/icons'
 import i18n from './i18n'
+import * as Sentry from '@sentry/browser';
+import * as Integrations from '@sentry/integrations';
+Sentry.init({
+    dsn: 'https://891e4b1a1e4842c7a8ad4d112aa734c3@sentry.io/1812604',
+    integrations: [new Integrations.Vue({Vue, attachProps: true})],
+});
 // Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(mavonEditor)

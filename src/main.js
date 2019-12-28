@@ -16,9 +16,13 @@ import '@/icons'
 import i18n from './i18n'
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
+
 Sentry.init({
-    dsn: 'https://891e4b1a1e4842c7a8ad4d112aa734c3@sentry.io/1812604',
-    integrations: [new Integrations.Vue({Vue, attachProps: true})],
+    dsn: 'https://650a22e14f7348c996aea8ebee1fda2f@sentry.io/1865702',
+    integrations: [new Integrations.Vue({
+        Vue,
+        attachProps: true
+    })],
 });
 // Vue.config.productionTip = false
 Vue.use(ElementUI);

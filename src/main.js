@@ -17,12 +17,14 @@ import i18n from './i18n'
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 
-Sentry.init({
+process.env.NODE_ENV === "production" && Sentry.init({
     dsn: 'https://650a22e14f7348c996aea8ebee1fda2f@sentry.io/1865702',
     integrations: [new Integrations.Vue({
         Vue,
         attachProps: true
     })],
+    release: 'test@1.0.2',
+    logErrors: true
 });
 // Vue.config.productionTip = false
 Vue.use(ElementUI);

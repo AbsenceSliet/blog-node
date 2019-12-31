@@ -1,56 +1,29 @@
 {
-    "name": "blog-press",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "build:pro": "NODE_ENV=production vue-cli-service build --mode pro",
-        "lint": "vue-cli-service lint",
-        "test:e2e": "vue-cli-service test:e2e",
-        "test:unit": "vue-cli-service test:unit"
-    },
-    "dependencies": {
-        "@sentry/browser": "^5.10.2",
-        "element-ui": "^2.6.1",
-        "express": "^4.16.4",
-        "js-base64": "^2.5.1",
-        "js-cookie": "^2.2.0",
-        "mavon-editor": "^2.7.2",
-        "path": "^0.12.7",
-        "qiniu": "^7.2.1",
-        "react": "^16.8.6",
-        "register-service-worker": "^1.5.2",
-        "svg-sprite-loader": "^4.1.3",
-        "vue": "^2.6.6",
-        "vue-fullscreen": "^2.1.5",
-        "vue-i18n": "^8.0.0",
-        "vue-router": "^3.0.1",
-        "vuex": "^3.0.1"
-    },
-    "devDependencies": {
-        "@vue/cli-plugin-babel": "^3.4.0",
-        "@vue/cli-plugin-e2e-cypress": "^3.4.0",
-        "@vue/cli-plugin-eslint": "^3.4.0",
-        "@vue/cli-plugin-pwa": "^3.4.0",
-        "@vue/cli-plugin-unit-mocha": "^3.4.0",
-        "@vue/cli-service": "^3.4.0",
-        "@vue/test-utils": "^1.0.0-beta.20",
-        "axios": "^0.18.0",
-        "babel-eslint": "^10.0.1",
-        "babel-plugin-component": "^1.1.1",
-        "babel-plugin-transform-remove-console": "^6.9.4",
-        "chai": "^4.1.2",
-        "compression-webpack-plugin": "^2.0.0",
-        "eslint": "^5.8.0",
-        "eslint-plugin-vue": "^5.0.0",
-        "fibers": "^3.1.1",
-        "sass": "^1.16.0",
-        "sass-loader": "^7.1.0",
-        "uglifyjs-webpack-plugin": "^2.1.3",
-        "vue-cli-plugin-axios": "^0.0.4",
-        "vue-cli-plugin-i18n": "^0.5.2",
-        "vue-template-compiler": "^2.5.21",
-        "webpack-cli": "^3.3.2"
-    }
+  "name": "blog-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "core-js": "^3.4.4",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-property-decorator": "^8.3.0",
+    "vue-router": "^3.1.3",
+    "vuex": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-typescript": "^4.1.0",
+    "@vue/cli-plugin-unit-jest": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "typescript": "~3.5.3",
+    "vue-template-compiler": "^2.6.10"
+  }
 }

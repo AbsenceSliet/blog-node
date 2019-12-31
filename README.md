@@ -1,4 +1,4 @@
-# blog-press
+# blog-admin
 
 ## Project setup
 ```
@@ -25,11 +25,6 @@ yarn run test
 yarn run lint
 ```
 
-### Run your end-to-end tests
-```
-yarn run test:e2e
-```
-
 ### Run your unit tests
 ```
 yarn run test:unit
@@ -37,11 +32,3 @@ yarn run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-##### pm2启动服务端接口
-进入```server```文件夹  
-
-```
-pm2 start ecosystem.config.js --interpreter babel-node
-```

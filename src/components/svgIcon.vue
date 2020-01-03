@@ -5,8 +5,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
+@Component
 export default class SvgIcon extends Vue {
-  @Prop(String) private iconClass!: string;
+  @Prop()
+  private iconClass!: string;
   @Prop(String) private className!: string;
   private get iconName(): string {
     return `#icon-${this.iconClass}`;

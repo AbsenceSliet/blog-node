@@ -1,9 +1,9 @@
 <template>
-  <el-menu default-active="1-4-1" :collapse="isCollapse">
-    <section v-for="(item,index) in permissionRoutes" :key="{index}">
+  <el-menu default-active :collapse="isCollapse" :unique-opened="false" :collapse-transition="false">
+    <section v-for="(item,index) in permissionRoutes" :key="index">
       <el-submenu v-if="item.children" :index="item.path">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <svg-icon :iconClass="item.icon" />
           <span slot="title">{{item.name}}</span>
         </template>
         <nav>
@@ -15,7 +15,7 @@
         </nav>
       </el-submenu>
       <el-menu-item index="2" v-else>
-        <i class="el-icon-menu"></i>
+        <svg-icon :iconClass="item.icon" />
         <span slot="title">{{item.name}}</span>
       </el-menu-item>
     </section>
@@ -32,17 +32,21 @@ interface PermissionRouteItem {
 @Component
 export default class SideBar extends Vue {
   private permissionRoutes: PermissionRouteItem[];
+  private isCollapse: boolean;
   constructor() {
     super();
+    this.isCollapse = true;
     this.permissionRoutes = [
       {
         name: "设置",
         path: "/setting",
+        icon: "setting",
         children: [{ name: "个人中心", path: "profile" }]
       },
-      { name: "仪表盘", path: "/dashboard" },
+      { name: "仪表盘", path: "/dashboard", icon: "dashboard" },
       {
         name: "文章",
+        icon: "article",
         path: "/articles",
         children: [
           { name: "新建文章", path: "/create" },
@@ -53,3 +57,4 @@ export default class SideBar extends Vue {
   }
 }
 </script>
+

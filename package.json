@@ -27,6 +27,7 @@
     "babel-plugin-component": "^1.1.1",
     "node-sass": "^4.13.0",
     "sass-loader": "^8.0.0",
+    "svg-sprite-loader": "^4.1.6",
     "typescript": "~3.5.3",
     "vue-template-compiler": "^2.6.10"
   }

@@ -29,7 +29,7 @@ interface LoginForm {
 }
 
 @Component
-export default class App extends Vue {
+export default class Login extends Vue {
   private loginForm: LoginForm;
   private showLogin: boolean;
   private rules: any;

@@ -6,19 +6,26 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 export default class SvgIcon extends Vue {
-  // @Prop({
-  //     type:String,
-  //     required:true
-  // })
-  // iconClass:string;
-  // @Prop({
-  //     type:String,
-  //     required:true
-  // })
-  // className:string;
-  // iconName :string
-  // set iconName(param:string):void{
-  //     if()
-  // }
+  @Prop(String) private iconClass!: string;
+  @Prop(String) private className!: string;
+  private get iconName(): string {
+    return `#icon-${this.iconClass}`;
+  }
+  private get svgClass(): string {
+    if (this.className) {
+      return `svg-icon  ${this.className}`;
+    } else {
+      return `svg-icon`;
+    }
+  }
 }
 </script>
+<style lang="scss" scoped>
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+</style>
